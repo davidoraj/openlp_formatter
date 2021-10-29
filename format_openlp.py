@@ -294,14 +294,13 @@ def get_xml(tag, text, props=''):
 
 def save_to_xml(song):
     start = """<?xml version='1.0' encoding='UTF-8'?>
-        <song xmlns="http://openlyrics.info/namespace/2009/song" 
-        version="0.8" createdIn="OpenLP 2.4.6" modifiedIn="OpenLP 2.4.6">"""
+<song xmlns="http://openlyrics.info/namespace/2009/song" version="0.8" createdIn="OpenLP 2.4.6" modifiedIn="OpenLP 2.4.6">"""
 
     properties_text = \
         get_xml('titles', get_xml('title', song['title'])) + \
         get_xml('authors', get_xml('author', 'Unknown')) + \
         get_xml('verseOrder', song['verse_order'].lower())
-    properties = get_xml('properties', properties_text)
+    properties = '\n' + get_xml('properties', properties_text) + '\n'
 
     # Create a list of verses with name=verse_id
     # song['lyrics_xml'] is an ordered dict with key=verse_id, value=[slide-lyrics]
@@ -309,10 +308,10 @@ def save_to_xml(song):
     for vid in song['lyrics_xml']:
         verse_lines = get_xml('lines', ''.join(song['lyrics_xml'][vid]))
         lyrics_xml_list.append(get_xml('verse', verse_lines, 'name="{}"'.format(vid)))
-    end = "</song>"
+    end = "\n</song>"
 
     # Put combine xml content into one string
-    song_xml = start + properties + get_xml('lyrics', ''.join(lyrics_xml_list)) + end
+    song_xml = start + properties + get_xml('lyrics', '\n'.join(lyrics_xml_list)) + end
 
     # Write to file
     with open(song['title'] + '.xml', 'w') as xml_file:
