@@ -1,7 +1,11 @@
 import re
 import string
 from collections import OrderedDict
-import xml.dom.minidom
+import os
+from PIL import Image, ImageDraw, ImageFont
+from pptx import Presentation
+
+# import xml.dom.minidom
 
 default_lines_per_slide = 4
 section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'D': 'Bridge', 'T': 'Other', 'O': 'Other'}
@@ -15,10 +19,20 @@ verse_parts = list(string.ascii_lowercase)  # Creates ['a', 'b', 'c', ..., 'z']
 line_delim = '<br/>'
 section_delim = '<br/><br/>'
 
+# Image / PPT Creation
+img_format = 'png'
+img_offset_top = 20
+img_offset1 = 20
+img_offset2 = 980
+img_font_spacing = 15
+img_font = ImageFont.truetype('Nirmala.ttf', size=44)
+img_width = 1920
+img_height = 350
+
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_10-24-21.txt', 'r') as lyricsfile:
+with open('lyrics_11-07-21.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -318,6 +332,70 @@ def save_to_xml(song):
         # TODO: Find a way to pretty print without disturbing verse lines text
         # xml_file.write(xml.dom.minidom.parseString(song_xml).toprettyxml())
         xml_file.write(song_xml)
+    return
+
+
+def save_to_images(content):
+    # Save under subdir
+    dir = 'images'
+
+    # Clear older images
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))
+
+    for img_name, text1, text2 in content:
+        image = Image.new(mode="RGB", size=(img_width, img_height), color=(0, 200, 0))
+        imageDraw = ImageDraw.Draw(image)
+        imageDraw.multiline_text(xy=(img_offset1, img_offset_top), font=img_font, spacing=img_font_spacing, text=text1)
+        imageDraw.multiline_text(xy=(img_offset2, img_offset_top), font=img_font, spacing=img_font_spacing, text=text2)
+        image.save(fp=os.path.join(dir, img_name))
+
+    return
+
+
+def get_song_lyrics_content(song, i):
+    lyrics_dict = song['lyrics_xml']  # odict_keys(['c1a', 'v1a', 'v2a', 'v3a', 'v4a', 'v5a', 'v6a'])
+    j = 0
+    two_langs = True if song['order'][0] + '_two' in song['sections'] else False
+    content = []
+    for id in song['order']:
+        id = id.lower()
+        j = j + 1
+        for counter in verse_parts:
+            vid = id + counter
+            if vid in lyrics_dict:
+                img_name = '{:0>2d}-{:0>2d}_{}.{}'.format(i, j, vid, img_format)
+                if two_langs:
+                    lyrics_two_langs = lyrics_dict[vid].split(line_delim + line_delim)
+                    text1 = lyrics_two_langs[0].replace(line_delim, '\n')
+                    text2 = lyrics_two_langs[1].replace(line_delim, '\n')
+                    content.append((img_name, text1, text2))
+                else:
+                    content.append((img_name, text1, None))
+            else:
+                break
+
+    return content
+
+
+def save_to_ppt(content, root):
+    try:
+        os.remove('Lyrics.pptx')
+    except:
+        print()
+
+    for img_name, text1, text2 in content:
+        if text2 is None:
+            slide_layout = root.slide_layouts[1]  # title and content
+        else:
+            slide_layout = root.slide_layouts[3]  # two content
+        slide = root.slides.add_slide(slide_layout)
+
+        slide.placeholders[0].text = text1
+        if text2:
+            slide.placeholders[1].text = text2
+
+    return
 
 
 def main():
@@ -327,17 +405,34 @@ def main():
     # Parse all the songs (returns a list of song objects)
     songs = get_song_objects(song_lines_list)
 
+    # Init empty presentation
+    root = Presentation()
+
+    i = 1
     # Create slides
     for song in songs:
 
         # Export to xml
         save_to_xml(song)
 
+        # Export to images / ppt
+        content = get_song_lyrics_content(song, i)
+        # save_to_images(content)
+        # save_to_ppt(content, root)
+
         # Print text
         print("----------------------------------")
         print(song['verse_order'])
         for line in song['deck']:
             print(line)
+
+    root.save("Lyrics.pptx")
+
+    print("----------------------------------")
+    i = 1
+    for song in songs:
+        print('{}. {}'.format(i, song['title']))
+        i = i + 1
 
 
 if __name__ == "__main__":
