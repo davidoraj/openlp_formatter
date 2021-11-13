@@ -4,11 +4,12 @@ from collections import OrderedDict
 import os
 from PIL import Image, ImageDraw, ImageFont
 from pptx import Presentation
+from pptx.util import Inches, Pt
 
 # import xml.dom.minidom
 
 default_lines_per_slide = 4
-section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'D': 'Bridge', 'T': 'Other', 'O': 'Other'}
+section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'B': 'Bridge', 'T': 'Other', 'O': 'Other'}
 sections = {'Verse', 'Chorus', 'Pre-chorus', 'Bridge', 'Tag', 'Instrumental', 'BREAK'}
 ignore_section = {'BREAK'}
 sections_regex = '|'.join(['^' + section + '[0-9 ]*:$' for section in sections])
@@ -28,6 +29,14 @@ img_font_spacing = 15
 img_font = ImageFont.truetype('Nirmala.ttf', size=44)
 img_width = 1920
 img_height = 350
+
+lyrics_ppt_file = "Lyrics.pptx"
+
+inches_margin_left = 0.4
+inches_margin_right = 0.4
+inches_margin_top = 0.4
+inches_total_width = 8.5
+inches_total_height = 6
 
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
@@ -371,6 +380,7 @@ def get_song_lyrics_content(song, i):
                     text2 = lyrics_two_langs[1].replace(line_delim, '\n')
                     content.append((img_name, text1, text2))
                 else:
+                    text1 = lyrics_dict[vid].replace(line_delim, '\n')
                     content.append((img_name, text1, None))
             else:
                 break
@@ -378,22 +388,63 @@ def get_song_lyrics_content(song, i):
     return content
 
 
-def save_to_ppt(content, root):
+def add_textbox(shapes, text, left, top, width, height):
+    textBox = shapes.add_textbox(left, top, width, height)
+    textFrame = textBox.text_frame
+    para = textFrame.paragraphs[0]
+    para.text = text
+    para.line_spacing = Pt(24)
+    font = para.font
+    font.name = 'Gautami'
+    font.size = Pt(16)
+    font.bold = True
+    return
+
+
+def add_title(root, title):
+    slide = root.slides.add_slide(root.slide_layouts[6])
+    shapes = slide.shapes
+    textBox = shapes.add_textbox(Inches(inches_total_width / 4),
+                                 Inches(inches_margin_top),
+                                 Inches(inches_total_width),
+                                 Inches(inches_total_height))
+    textFrame = textBox.text_frame
+    para = textFrame.paragraphs[0]
+    para.text = title
+    para.line_spacing = Pt(24)
+    font = para.font
+    font.name = 'Gautami'
+    font.size = Pt(24)
+    font.bold = True
+    return
+
+
+def save_to_ppt(content, root, title):
     try:
-        os.remove('Lyrics.pptx')
+        os.remove(lyrics_ppt_file)
     except:
         print()
 
-    for img_name, text1, text2 in content:
-        if text2 is None:
-            slide_layout = root.slide_layouts[1]  # title and content
-        else:
-            slide_layout = root.slide_layouts[3]  # two content
-        slide = root.slides.add_slide(slide_layout)
+    top = Inches(inches_margin_top)
+    width = Inches(inches_total_width / 2)
+    height = Inches(inches_total_height)
 
-        slide.placeholders[0].text = text1
+    add_title(root, title)
+    slide_layout = root.slide_layouts[6]
+
+    for img_name, text1, text2 in content:
+        slide = root.slides.add_slide(slide_layout)
+        shapes = slide.shapes
+
         if text2:
-            slide.placeholders[1].text = text2
+            left = Inches(inches_margin_left)
+            add_textbox(shapes, text2, left, top, width, height)
+
+            left = Inches(inches_margin_left * 2 + inches_total_width / 2)
+            add_textbox(shapes, text1, left, top, width, height)
+        else:
+            left = Inches(inches_margin_left * 2 + inches_total_width / 4)
+            add_textbox(shapes, text1, left, top, width, height)
 
     return
 
@@ -418,15 +469,20 @@ def main():
         # Export to images / ppt
         content = get_song_lyrics_content(song, i)
         # save_to_images(content)
-        # save_to_ppt(content, root)
+        save_to_ppt(content, root, song['title'])
 
         # Print text
         print("----------------------------------")
-        print(song['verse_order'])
-        for line in song['deck']:
-            print(line)
+        # print(song['verse_order'])
+        # for line in song['deck']:
+        #     print(line)
+        for id, text1, text2 in content:
+            print('--')
+            print(text1)
+            if text2:
+                print(text2)
 
-    root.save("Lyrics.pptx")
+    root.save(lyrics_ppt_file)
 
     print("----------------------------------")
     i = 1
