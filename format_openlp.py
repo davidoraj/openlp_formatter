@@ -5,6 +5,7 @@ import os
 from PIL import Image, ImageDraw, ImageFont
 from pptx import Presentation
 from pptx.util import Inches, Pt
+from pptx.dml.color import RGBColor
 
 # import xml.dom.minidom
 
@@ -30,12 +31,13 @@ img_font = ImageFont.truetype('Nirmala.ttf', size=44)
 img_width = 1920
 img_height = 350
 
-lyrics_ppt_file = "Lyrics.pptx"
+lyrics_ppt_file_green = "Lyrics GREEN.pptx"
+lyrics_ppt_file_main = "ICC Worship Lyrics.pptx"
 
 inches_margin_left = 0.4
 inches_margin_right = 0.4
 inches_margin_top = 0.4
-inches_total_width = 8.5
+inches_total_width = 8.6
 inches_total_height = 6
 
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
@@ -388,8 +390,21 @@ def get_song_lyrics_content(song, i):
     return content
 
 
-def add_textbox(shapes, text, left, top, width, height):
-    textBox = shapes.add_textbox(left, top, width, height)
+def get_green_slide(root):
+    slide = root.slides.add_slide(root.slide_layouts[6])
+    fill = slide.background.fill
+    fill.solid()
+    fill.fore_color.rgb = RGBColor(0, 200, 0)
+    return slide
+
+
+def get_blank_slide(root):
+    slide = root.slides.add_slide(root.slide_layouts[6])
+    return slide
+
+
+def add_textbox(slide, text, left, top, width, height):
+    textBox = slide.shapes.add_textbox(left, top, width, height)
     textFrame = textBox.text_frame
     para = textFrame.paragraphs[0]
     para.text = text
@@ -398,11 +413,25 @@ def add_textbox(shapes, text, left, top, width, height):
     font.name = 'Gautami'
     font.size = Pt(16)
     font.bold = True
+    font.color.rgb = RGBColor(255, 255, 255)
+    return
+
+
+def add_textbox_main(slide, text, left, top, width, height):
+    textBox = slide.shapes.add_textbox(left, top, width, height)
+    textFrame = textBox.text_frame
+    para = textFrame.paragraphs[0]
+    para.text = text
+    para.line_spacing = Pt(40)
+    font = para.font
+    font.name = 'Gautami'
+    font.size = Pt(28)
+    font.bold = True
     return
 
 
 def add_title(root, title):
-    slide = root.slides.add_slide(root.slide_layouts[6])
+    slide = get_green_slide(root)
     shapes = slide.shapes
     textBox = shapes.add_textbox(Inches(inches_total_width / 4),
                                  Inches(inches_margin_top),
@@ -416,12 +445,31 @@ def add_title(root, title):
     font.name = 'Gautami'
     font.size = Pt(24)
     font.bold = True
+    font.color.rgb = RGBColor(255, 255, 255)
     return
 
 
-def save_to_ppt(content, root, title):
+def add_title_main(root, title):
+    slide = get_blank_slide(root)
+    shapes = slide.shapes
+    textBox = shapes.add_textbox(Inches(inches_margin_left * 2),
+                                 Inches(inches_margin_top + inches_total_height / 2),
+                                 Inches(inches_total_width),
+                                 Inches(inches_total_height))
+    textFrame = textBox.text_frame
+    para = textFrame.paragraphs[0]
+    para.text = title
+    para.line_spacing = Pt(32)
+    font = para.font
+    font.name = 'Gautami'
+    font.size = Pt(40)
+    font.bold = True
+    return
+
+
+def save_to_ppt_green(content, root, title):
     try:
-        os.remove(lyrics_ppt_file)
+        os.remove(lyrics_ppt_file_green)
     except:
         print()
 
@@ -430,21 +478,47 @@ def save_to_ppt(content, root, title):
     height = Inches(inches_total_height)
 
     add_title(root, title)
-    slide_layout = root.slide_layouts[6]
 
     for img_name, text1, text2 in content:
-        slide = root.slides.add_slide(slide_layout)
-        shapes = slide.shapes
+        slide = get_green_slide(root)
 
         if text2:
             left = Inches(inches_margin_left)
-            add_textbox(shapes, text2, left, top, width, height)
+            add_textbox(slide, text2, left, top, width, height)
 
             left = Inches(inches_margin_left * 2 + inches_total_width / 2)
-            add_textbox(shapes, text1, left, top, width, height)
+            add_textbox(slide, text1, left, top, width, height)
         else:
             left = Inches(inches_margin_left * 2 + inches_total_width / 4)
-            add_textbox(shapes, text1, left, top, width, height)
+            add_textbox(slide, text1, left, top, width, height)
+
+    return
+
+
+def save_to_ppt_main(content, root, title):
+    try:
+        os.remove(lyrics_ppt_file_main)
+    except:
+        print()
+
+    left = Inches(inches_margin_left)
+    width = Inches(inches_total_width)
+    height = Inches(inches_total_height / 2)
+
+    add_title_main(root, title)
+
+    for img_name, text1, text2 in content:
+        slide = get_blank_slide(root)
+
+        if text2:
+            top = Inches(inches_margin_top)
+            add_textbox_main(slide, text2, left, top, width, height)
+
+            top = Inches(inches_margin_top * 2 + inches_total_height / 2)
+            add_textbox_main(slide, text1, left, top, width, height)
+        else:
+            top = Inches(inches_margin_top * 2 + inches_total_height / 4)
+            add_textbox_main(slide, text1, left, top, width, height)
 
     return
 
@@ -457,7 +531,8 @@ def main():
     songs = get_song_objects(song_lines_list)
 
     # Init empty presentation
-    root = Presentation()
+    pptx_green = Presentation()
+    pptx_main = Presentation()
 
     i = 1
     # Create slides
@@ -469,7 +544,8 @@ def main():
         # Export to images / ppt
         content = get_song_lyrics_content(song, i)
         # save_to_images(content)
-        save_to_ppt(content, root, song['title'])
+        save_to_ppt_green(content, pptx_green, song['title'])
+        save_to_ppt_main(content, pptx_main, song['title'])
 
         # Print text
         print("----------------------------------")
@@ -482,7 +558,8 @@ def main():
             if text2:
                 print(text2)
 
-    root.save(lyrics_ppt_file)
+    pptx_green.save(lyrics_ppt_file_green)
+    pptx_main.save(lyrics_ppt_file_main)
 
     print("----------------------------------")
     i = 1
