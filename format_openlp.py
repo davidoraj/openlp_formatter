@@ -23,7 +23,7 @@ section_delim = '<br/><br/>'
 
 lyrics_ppt_file_green = "Lyrics GREEN.pptx"
 lyrics_ppt_file_main = "ICC Worship Lyrics.pptx"
-background_image_path = 'backgrounds/ICC_slides_template.006.jpeg'
+background_image_path = 'backgrounds/ICC_slides_template.001.jpeg'
 
 inches_margin_left = 0.4
 inches_margin_right = 0.4
