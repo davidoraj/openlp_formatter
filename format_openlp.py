@@ -420,7 +420,7 @@ def add_textbox_main(slide, text, left, top, width, height):
 def add_title_green(root, title):
     slide = get_green_slide(root)
     shapes = slide.shapes
-    textBox = shapes.add_textbox(Inches(inches_total_width / 4),
+    textBox = shapes.add_textbox(Inches(inches_margin_left),
                                  Inches(inches_margin_top),
                                  Inches(inches_total_width),
                                  Inches(inches_total_height))
@@ -440,7 +440,7 @@ def add_title_green(root, title):
 def add_title_main(root, title):
     slide = get_blank_slide(root)
     shapes = slide.shapes
-    textBox = shapes.add_textbox(Inches(inches_margin_left * 2),
+    textBox = shapes.add_textbox(Inches(inches_margin_left),
                                  Inches(inches_margin_top + inches_total_height / 2),
                                  Inches(inches_total_width),
                                  Inches(inches_total_height))
