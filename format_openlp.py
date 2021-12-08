@@ -4,10 +4,13 @@ from collections import OrderedDict
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
-from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT
+from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR
 from create_lyrics_images import *
 
 # import xml.dom.minidom
+
+# README
+# Max chars per line = 38
 
 default_lines_per_slide = 4
 section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'B': 'Bridge', 'T': 'Other', 'O': 'Other'}
@@ -25,11 +28,18 @@ lyrics_ppt_file_green = "Lyrics GREEN.pptx"
 lyrics_ppt_file_main = "ICC Worship Lyrics.pptx"
 background_image_path = 'backgrounds/ICC_slides_template.001.jpeg'
 
-inches_margin_left = 0.4
-inches_margin_right = 0.4
-inches_margin_top = 0.4
-inches_total_width = 8.6
-inches_total_height = 6
+margin = 0.2
+total_width = 8
+total_height = 6
+inches_margin_left = Inches(margin)
+inches_margin_right = Inches(margin)
+inches_margin_top = Inches(margin)
+inches_total_width = Inches(total_width)
+inches_total_height = Inches(total_height)
+inches_total_width_full = Inches(total_width - margin * 2)
+inches_total_height_full = Inches(total_height - margin * 2)
+inches_total_width_half = Inches(total_width / 2)
+inches_total_height_half = Inches(total_height / 2)
 
 font_name = 'Gautami'
 
@@ -46,7 +56,7 @@ font_spacing_main = 40
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_11-21-21.txt', 'r') as lyricsfile:
+with open('lyrics_12-05-21.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -236,7 +246,8 @@ def merge_lyrics_xml(dict1, dict2):
     for id in dict1.keys():
         xml_string = line_delim.join(dict1[id])
         if dict2:
-            xml_string = xml_string + section_delim + line_delim.join(dict2[id])
+            # (Telugu on top, English at the bottom)
+            xml_string = line_delim.join(dict2[id]) + section_delim + xml_string
         lyrics_xml[id] = xml_string
 
     return lyrics_xml
@@ -395,6 +406,7 @@ def add_textbox_green(slide, text, left, top, width, height):
     para = textFrame.paragraphs[0]
     para.text = text
     para.line_spacing = Pt(font_spacing_green)
+    para.alignment = PP_PARAGRAPH_ALIGNMENT.CENTER
     font = para.font
     font.name = font_name
     font.size = Pt(font_size_green)
@@ -406,9 +418,11 @@ def add_textbox_green(slide, text, left, top, width, height):
 def add_textbox_main(slide, text, left, top, width, height):
     textBox = slide.shapes.add_textbox(left, top, width, height)
     textFrame = textBox.text_frame
+    textFrame.vertical_anchor = MSO_VERTICAL_ANCHOR.MIDDLE
     para = textFrame.paragraphs[0]
     para.text = text
     para.line_spacing = Pt(font_spacing_main)
+    para.alignment = PP_PARAGRAPH_ALIGNMENT.CENTER
     font = para.font
     font.name = font_name
     font.size = Pt(font_size_main)
@@ -420,10 +434,10 @@ def add_textbox_main(slide, text, left, top, width, height):
 def add_title_green(root, title):
     slide = get_green_slide(root)
     shapes = slide.shapes
-    textBox = shapes.add_textbox(Inches(inches_margin_left),
-                                 Inches(inches_margin_top),
-                                 Inches(inches_total_width),
-                                 Inches(inches_total_height))
+    textBox = shapes.add_textbox(inches_margin_left,
+                                 inches_margin_top,
+                                 inches_total_width_full,
+                                 inches_total_height_full)
     textFrame = textBox.text_frame
     para = textFrame.paragraphs[0]
     para.text = title
@@ -440,11 +454,12 @@ def add_title_green(root, title):
 def add_title_main(root, title):
     slide = get_blank_slide(root)
     shapes = slide.shapes
-    textBox = shapes.add_textbox(Inches(inches_margin_left),
-                                 Inches(inches_margin_top + inches_total_height / 2),
-                                 Inches(inches_total_width),
-                                 Inches(inches_total_height))
+    textBox = shapes.add_textbox(inches_margin_left,
+                                 inches_margin_top,
+                                 inches_total_width_full,
+                                 inches_total_height_full)
     textFrame = textBox.text_frame
+    textFrame.vertical_anchor = MSO_VERTICAL_ANCHOR.MIDDLE  # Vertical align middle title
     para = textFrame.paragraphs[0]
     para.text = title
     para.line_spacing = Pt(font_spacing_main)
@@ -463,25 +478,21 @@ def save_to_ppt_green(content, root, title):
     except:
         print()
 
-    top = Inches(inches_margin_top)
-    width = Inches(inches_total_width / 2)
-    height = Inches(inches_total_height)
-
     add_title_green(root, "Worship")
-    add_title_green(root, title)
+    # add_title_green(root, title)
 
     for img_name, text1, text2 in content:
         slide = get_green_slide(root)
 
         if text2:
-            left = Inches(inches_margin_left)
-            add_textbox_green(slide, text2, left, top, width, height)
+            add_textbox_green(slide, text2, inches_margin_left, inches_margin_top,
+                              inches_total_width_half, inches_total_height_full)
 
-            left = Inches(inches_margin_left * 2 + inches_total_width / 2)
-            add_textbox_green(slide, text1, left, top, width, height)
+            add_textbox_green(slide, text1, inches_total_width_half, inches_margin_top,
+                              inches_total_width_half, inches_total_height_full)
         else:
-            left = Inches(inches_margin_left * 2 + inches_total_width / 4)
-            add_textbox_green(slide, text1, left, top, width, height)
+            add_textbox_green(slide, text1, inches_margin_left, inches_margin_top,
+                              inches_total_width_full, inches_total_height_full)
 
     return
 
@@ -492,26 +503,29 @@ def save_to_ppt_main(content, root, title):
     except:
         print()
 
-    left = Inches(inches_margin_left)
-    width = Inches(inches_total_width)
-    height = Inches(inches_total_height / 2)
-
     add_title_main(root, title)
 
     for img_name, text1, text2 in content:
         slide = get_blank_slide(root)
 
         if text2:
-            top = Inches(inches_margin_top)
-            add_textbox_main(slide, text2, left, top, width, height)
+            add_textbox_main(slide, text1, inches_margin_left, inches_margin_top,
+                             inches_total_width_full, inches_total_height_half)
 
-            top = Inches(inches_margin_top + inches_total_height / 2)
-            add_textbox_main(slide, text1, left, top, width, height)
+            add_textbox_main(slide, text2, inches_margin_left, inches_total_height_half,
+                             inches_total_width_full, inches_total_height_half)
         else:
-            top = Inches(inches_margin_top * 2 + inches_total_height / 4)
-            add_textbox_main(slide, text1, left, top, width, height)
+            add_textbox_main(slide, text1, inches_margin_left, inches_margin_top,
+                             inches_total_width_full, inches_total_height_full)
 
     return
+
+
+def create_new_presentation():
+    presentation = Presentation()
+    presentation.slide_width = Inches(total_width)
+    presentation.slide_height = Inches(total_height)
+    return presentation
 
 
 def main():
@@ -522,8 +536,8 @@ def main():
     songs = get_song_objects(song_lines_list)
 
     # Init empty presentation
-    pptx_green = Presentation()
-    pptx_main = Presentation()
+    pptx_green = create_new_presentation()
+    pptx_main = create_new_presentation()
     init_images_dir()
 
     i = 1
