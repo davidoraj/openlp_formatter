@@ -56,7 +56,7 @@ font_spacing_main = 40
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_12-05-21.txt', 'r') as lyricsfile:
+with open('lyrics_text/lyrics_12-12-21.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -109,13 +109,19 @@ def get_song_annotated(one, two, lines_per_slide, title):
             if rsection not in ignore_section:
                 order.append(sid)
             sid = None
-        elif not sid:
-            print('Missing song annotation at "{}"'.format(line))
         else:
-            key = sid + '_one'
-            content = sections.get(key, [])
-            content.append(line)
-            sections[key] = content
+            try:
+                if not sid:
+                    print('Missing annotation or title at "{}"'.format(line))
+                    exit(1)
+                else:
+                    key = sid + '_one'
+                    content = sections.get(key, [])
+                    content.append(line)
+                    sections[key] = content
+            except UnboundLocalError:
+                print('Missing annotation or title at "{}"'.format(line))
+                exit(1)
 
     section_map = set()
     i = 0
