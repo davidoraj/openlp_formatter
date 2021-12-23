@@ -26,7 +26,8 @@ section_delim = '<br/><br/>'
 
 lyrics_ppt_file_green = "Lyrics GREEN.pptx"
 lyrics_ppt_file_main = "ICC Worship Lyrics.pptx"
-background_image_path = 'backgrounds/ICC_slides_template.001.jpeg'
+# background_image_path = 'backgrounds/ICC_slides_template.001.jpeg'
+background_image_path = 'backgrounds/chr1.jpeg'
 
 margin = 0.2
 total_width = 8
@@ -45,18 +46,18 @@ font_name = 'Gautami'
 
 # Fonts for green slides (Live)
 font_size_title_green = 26
-font_size_green = 16
-font_spacing_green = 24
+font_size_green = 14 #16
+font_spacing_green = 22 #24
 
 # Fonts for main slides
-font_size_title_main = 40
-font_size_main = 28
-font_spacing_main = 40
+font_size_title_main = 38
+font_size_main = 26
+font_spacing_main = 38
 
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_text/lyrics_12-12-21.txt', 'r') as lyricsfile:
+with open('lyrics_text/lyrics_12-25-21.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -156,7 +157,7 @@ def get_song_objects(song_lines_list):
 
     for song_lines in song_lines_list:
         line = song_lines[0][0]  # first line ---
-        title = song_lines[0][1]  # second line
+        title = song_lines[0][1].title()  # second line
         one = song_lines[0][2:]
         two = song_lines[1]
 
@@ -316,6 +317,7 @@ def get_song_lines(lines):
     for i in range(len(lines)):
         line = lines[i]
         line = line.strip().strip("\n")
+        line = line.capitalize()
         if line.startswith("---"):
             if one:
                 song_lines_list.append((one, two))
@@ -402,7 +404,7 @@ def get_green_slide(root):
 
 def get_blank_slide(root):
     slide = root.slides.add_slide(root.slide_layouts[6])
-    slide.shapes.add_picture(background_image_path, Inches(0), Inches(0))
+    slide.shapes.add_picture(background_image_path, Inches(0), Inches(0), Inches(9), Inches(6))
     return slide
 
 
@@ -484,17 +486,18 @@ def save_to_ppt_green(content, root, title):
     except:
         print()
 
-    add_title_green(root, "Worship")
-    # add_title_green(root, title)
+    # add_title_green(root, "Worship")
+    add_title_green(root, '') # BLANK slide
+    add_title_green(root, title)
 
     for img_name, text1, text2 in content:
         slide = get_green_slide(root)
 
         if text2:
-            add_textbox_green(slide, text2, inches_margin_left, inches_margin_top,
+            add_textbox_green(slide, text1, inches_margin_left, inches_margin_top,
                               inches_total_width_half, inches_total_height_full)
 
-            add_textbox_green(slide, text1, inches_total_width_half, inches_margin_top,
+            add_textbox_green(slide, text2, inches_total_width_half, inches_margin_top,
                               inches_total_width_half, inches_total_height_full)
         else:
             add_textbox_green(slide, text1, inches_margin_left, inches_margin_top,
