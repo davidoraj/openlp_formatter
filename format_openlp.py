@@ -317,7 +317,11 @@ def get_song_lines(lines):
     for i in range(len(lines)):
         line = lines[i]
         line = line.strip().strip("\n")
-        line = line.capitalize()
+
+        # TODO: Capitalize first alphabet ignore numbers
+        if re.match('^[a-z]', line):
+            line = line.capitalize()
+
         if line.startswith("---"):
             if one:
                 song_lines_list.append((one, two))
