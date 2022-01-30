@@ -57,7 +57,7 @@ font_spacing_main = 38
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_text/lyrics_01-23-22.txt', 'r') as lyricsfile:
+with open('lyrics_text/lyrics_01-30-22.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -372,12 +372,16 @@ def save_to_xml(song):
     properties_text = \
         get_xml('titles', get_xml('title', song['title'])) + \
         get_xml('authors', get_xml('author', 'Unknown')) + \
-        get_xml('verseOrder', song['verse_order'].lower())
+        get_xml('verseOrder', 'i1 ' + song['verse_order'].lower())
     properties = '\n' + get_xml('properties', properties_text) + '\n'
 
     # Create a list of verses with name=verse_id
     # song['lyrics_xml'] is an ordered dict with key=verse_id, value=[slide-lyrics]
     lyrics_xml_list = []
+
+    # Add title slide
+    lyrics_xml_list.append(get_xml('verse', get_xml('lines', ''.join(song['title'])), 'name="{}"'.format('I1')))
+
     for vid in song['lyrics_xml']:
         verse_lines = get_xml('lines', ''.join(song['lyrics_xml'][vid]))
         lyrics_xml_list.append(get_xml('verse', verse_lines, 'name="{}"'.format(vid)))
