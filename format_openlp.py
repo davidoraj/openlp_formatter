@@ -5,7 +5,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR
-from create_lyrics_images import *
+# from create_lyrics_images import * TODO: checking img script
 
 # import xml.dom.minidom
 
@@ -26,8 +26,7 @@ section_delim = '<br/><br/>'
 
 lyrics_ppt_file_green = "Lyrics GREEN.pptx"
 lyrics_ppt_file_main = "ICC Worship Lyrics.pptx"
-# background_image_path = 'backgrounds/ICC_slides_template.001.jpeg'
-background_image_path = 'backgrounds/chr1.jpeg'
+background_image_path = 'backgrounds/ICC_slides_template.001.jpeg'
 
 margin = 0.2
 total_width = 8
@@ -57,7 +56,7 @@ font_spacing_main = 38
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_text/lyrics_12-25-21.txt', 'r') as lyricsfile:
+with open('lyrics_text/lyrics_02-20-22.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -383,7 +382,8 @@ def get_song_lyrics_content(song, i):
         for counter in verse_parts:
             vid = id + counter
             if vid in lyrics_dict:
-                img_name = '{:0>2d}-{:0>2d}_{}.{}'.format(i, j, vid, img_format)
+                # TODO: checking img script - use img_format var
+                img_name = '{:0>2d}-{:0>2d}_{}.{}'.format(i, j, vid, "img_format")
                 if two_langs:
                     lyrics_two_langs = lyrics_dict[vid].split(line_delim + line_delim)
                     text1 = lyrics_two_langs[0].replace(line_delim, '\n')
@@ -551,7 +551,7 @@ def main():
     # Init empty presentation
     pptx_green = create_new_presentation()
     pptx_main = create_new_presentation()
-    init_images_dir()
+    # init_images_dir() TODO: checking img script
 
     i = 1
     # Create slides
