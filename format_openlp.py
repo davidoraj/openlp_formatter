@@ -1,10 +1,12 @@
 import re
+import os
 import string
 from collections import OrderedDict
 from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR
+
 # from create_lyrics_images import * TODO: checking img script
 
 # import xml.dom.minidom
@@ -45,8 +47,8 @@ font_name = 'Gautami'
 
 # Fonts for green slides (Live)
 font_size_title_green = 26
-font_size_green = 14 #16
-font_spacing_green = 22 #24
+font_size_green = 14  # 16
+font_spacing_green = 22  # 24
 
 # Fonts for main slides
 font_size_title_main = 38
@@ -349,12 +351,17 @@ def save_to_xml(song):
     properties_text = \
         get_xml('titles', get_xml('title', song['title'])) + \
         get_xml('authors', get_xml('author', 'Unknown')) + \
-        get_xml('verseOrder', song['verse_order'].lower())
+        get_xml('verseOrder', f"i1 {song['verse_order'].lower()}")
     properties = '\n' + get_xml('properties', properties_text) + '\n'
 
     # Create a list of verses with name=verse_id
     # song['lyrics_xml'] is an ordered dict with key=verse_id, value=[slide-lyrics]
     lyrics_xml_list = []
+
+    # Add title
+    lyrics_xml_list.append(
+        get_xml('verse', get_xml('lines', song['title']), 'name="i1"'))
+
     for vid in song['lyrics_xml']:
         verse_lines = get_xml('lines', ''.join(song['lyrics_xml'][vid]))
         lyrics_xml_list.append(get_xml('verse', verse_lines, 'name="{}"'.format(vid)))
@@ -491,7 +498,7 @@ def save_to_ppt_green(content, root, title):
         print()
 
     # add_title_green(root, "Worship")
-    add_title_green(root, '') # BLANK slide
+    add_title_green(root, '')  # BLANK slide
     add_title_green(root, title)
 
     for img_name, text1, text2 in content:
@@ -564,7 +571,7 @@ def main():
         content = get_song_lyrics_content(song, i)
         # save_to_images(content)
         save_to_ppt_green(content, pptx_green, song['title'])
-        save_to_ppt_main(content, pptx_main, song['title'])
+        # save_to_ppt_main(content, pptx_main, song['title'])
         i = i + 1
 
         # Print text
