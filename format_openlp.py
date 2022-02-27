@@ -7,7 +7,7 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR
 
-# from create_lyrics_images import * TODO: checking img script
+from create_lyrics_images import *
 
 # import xml.dom.minidom
 
@@ -389,8 +389,7 @@ def get_song_lyrics_content(song, i):
         for counter in verse_parts:
             vid = id + counter
             if vid in lyrics_dict:
-                # TODO: checking img script - use img_format var
-                img_name = '{:0>2d}-{:0>2d}_{}.{}'.format(i, j, vid, "img_format")
+                img_name = '{:0>2d}-{:0>2d}_{}.{}'.format(i, j, vid, img_format)
                 if two_langs:
                     lyrics_two_langs = lyrics_dict[vid].split(line_delim + line_delim)
                     text1 = lyrics_two_langs[0].replace(line_delim, '\n')
@@ -558,7 +557,7 @@ def main():
     # Init empty presentation
     pptx_green = create_new_presentation()
     pptx_main = create_new_presentation()
-    # init_images_dir() TODO: checking img script
+    init_images_dir()
 
     i = 1
     # Create slides
