@@ -14,7 +14,7 @@ from create_lyrics_images import *
 # README
 # Max chars per line = 38
 
-default_lines_per_slide = 4
+default_lines_per_slide = 2
 section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'B': 'Bridge', 'T': 'Other', 'O': 'Other'}
 sections = {'Verse', 'Chorus', 'Pre-chorus', 'Bridge', 'Tag', 'Instrumental', 'BREAK'}
 ignore_section = {'BREAK'}
@@ -58,7 +58,7 @@ font_spacing_main = 38
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_text/lyrics_02-20-22.txt', 'r') as lyricsfile:
+with open('lyrics_text/lyrics_02-27-22.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -371,7 +371,7 @@ def save_to_xml(song):
     song_xml = start + properties + get_xml('lyrics', '\n'.join(lyrics_xml_list)) + end
 
     # Write to file
-    with open(song['title'] + '.xml', 'w') as xml_file:
+    with open(f"songs_xml/{song['title']}.xml", 'w') as xml_file:
         # TODO: Find a way to pretty print without disturbing verse lines text
         # xml_file.write(xml.dom.minidom.parseString(song_xml).toprettyxml())
         xml_file.write(song_xml)
