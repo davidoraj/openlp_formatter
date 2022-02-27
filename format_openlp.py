@@ -18,8 +18,8 @@ default_lines_per_slide = 2
 section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'B': 'Bridge', 'T': 'Other', 'O': 'Other'}
 sections = {'Verse', 'Chorus', 'Pre-chorus', 'Bridge', 'Tag', 'Instrumental', 'BREAK'}
 ignore_section = {'BREAK'}
-sections_regex = '|'.join(['^' + section + '[0-9 ]*:' for section in sections])
-repeat_section_regex = '|'.join(['^' + section + '[0-9 ]*$' for section in sections])
+sections_regex = '|'.join([f'^{section}[0-9 ]*:' for section in sections])
+repeat_section_regex = '|'.join([f'^{section}[0-9 ]*$' for section in sections])
 
 # Variables used for creating song xml
 verse_parts = list(string.ascii_lowercase)  # Creates ['a', 'b', 'c', ..., 'z']
@@ -525,8 +525,8 @@ def save_to_ppt_green(content, root, title):
     except:
         print()
 
-    # add_title_green(root, "Worship")
-    add_title_green(root, '')  # BLANK slide
+    add_title_green(root, "Worship")
+    # add_title_green(root, '')  # BLANK slide
     add_title_green(root, title)
 
     for img_name, text1, text2 in content:
