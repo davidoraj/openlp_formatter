@@ -1,6 +1,6 @@
 ---
 Praise To The Lord The Almighty
-Verse 1:[3]
+Verse 1:
 1. Praise to the Lord, the Almighty,
 The King of creation!
 O my soul, praise Him, for He is thy
@@ -9,7 +9,7 @@ All ye who hear
 Now to His temple draw near
 Sing now in glad adoration!
 
-Verse 2:[4]
+Verse 2:
 2. Praise to the Lord, who o’er all things
 So wondrously reigneth,
 Who, as on wings of an eagle,
@@ -18,7 +18,7 @@ Hast thou not seen
 How thy desires all have been
 Granted in what He ordaineth?
 
-Verse 3:[2]
+Verse 3:
 3. Praise to the Lord, who hath fearfully,
 Wondrously, made thee!
 Health hath vouchsafed and when
@@ -45,64 +45,54 @@ Let the Amen
 Sound from His people again
 Gladly for aye we adore Him.
 ---
-Kreestesulo Aikyata Korudamaa
+Daivam Prema Swarupam
 Chorus:
-Kreestesulo aikyata korudamaa
-Aatmayande sahavaasam korudamaa
-Aadarana protsaaham
-Vaatsalyam dayaa-premanu chupedamaa
+Daivam prema swarupam
+Premaku bhaashyam sreeyesude
+Avanilo daivam prema swarupam
+Premaku bhaashyam sreeyesude
 
 Pre-chorus:
-Kreestesuni manassutho
-Kreestesuni manassutho niratam
+Preme thyaaga-bharitam
+Siluvalo divya charitam (2)
+
+Chorus
 
 Verse 1:
-1. Manasulu kalisina premato
-Mamatalu virisina manasulato (2)
-Mana-dantaa oke baata
-Mana-mantaa oke maata (2)
+1. Ee dharalo prema sunyam
+Aadarana leni gamyam (2)
+Madhurampu yesu prema
+Madinimpu madura saanti (2)
 
 Chorus
-
+ 
 Verse 2:
-2. Adhikula-mani uppon-gaka
-Alpula-mani madhi-krungaka (2)
-Andarito sahavaasam
-Andarito samaadhaanam (2)
-
-Chorus
-
-Verse 3:
-3. Tana-para-bedham vidi-chedamu
-Tanu-vunu prabhu-karpin-chedamu (2)
-Mana-korakai prabhu-vachen
-Mana-korakai prabhu-vichen (2)
+2. Karuninchi kreestu neekai
+Maraninche siluva baliyai (2)
+Paraloka divya preman
+Dharaniche ninnu brovan (2)
 
 Chorus
 Pre-chorus
+Chorus
 --
-క్రీస్తేసులో ఐక్యత కోరుదమా
-ఆత్మయందే సహవాసం కోరుదమా
-ఆదరణ ప్రోత్సాహం
-వాత్సల్యం దయాప్రేమను చూపేదమా
+దైవం ప్రేమ స్వరూపం
+ప్రేమకు భాష్యం శ్రీయేసుడే
+అవనిలొ దైవం ప్రేమ స్వరూపం
+ప్రేమకు భాష్యం శ్రీయేసుడే
 
-క్రీస్తేసుని  మనస్సుతో
-క్రీస్తేసుని  మనస్సుతో నిరతం
+ప్రేమే త్యాగభరితం
+సిలువలో దివ్య చరితం (2)
 
-1. మనసులు కలిసిన ప్రేమతో
-మమతలు విరిసిన మనసులతో (2)
-మనదంతా ఒకే బాట
-మనమంతా ఒకే మాట (2)
+1. ఈ ధరలో ప్రేమ శూన్యం
+ఆదరణ లేని గమ్యం (2)
+మధురంపు యేసు ప్రేమ
+మదినింపు మదుర శాంతి (2)
 
-2. అధికులమని ఉప్పొంగక
-అల్పులమని మదికృంగక (2)
-అందరితో సహవాసం
-అందరితో సమాధానం (2)
-
-3. తనపరబేధం విడిచెదము
-తనువును ప్రభుకర్పించెదము (2)
-మనకొరకై ప్రభువచ్చెన్
-మనకొరకై ప్రభువిచ్చెన్ (2)
+2. కరుణించి క్రీస్తు నీకై
+మరణించె సిలువ బలియై (2)
+పరలోక దివ్య ప్రేమన్
+ధరనిచ్చె నిన్ను బ్రోవన్ (2)
 ---
 What A Beautiful Name
 Verse 1:
@@ -169,7 +159,7 @@ Unnata pilu-punaku kalugu
 Bahu-maanamu ponda-vale-nani (2)
 Prabhuva
 
-Verse 1:
+Verse 1: 
 1. Ey-vey-vi laabha-karamulai-yundeno
 Vaatini kreestuni-mittam (2)
 Nashta-mugaa enchu-koni
