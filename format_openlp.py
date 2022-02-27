@@ -7,19 +7,19 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR
 
-# from create_lyrics_images import * TODO: checking img script
+from create_lyrics_images import *
 
 # import xml.dom.minidom
 
 # README
 # Max chars per line = 38
 
-default_lines_per_slide = 4
+default_lines_per_slide = 2
 section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'B': 'Bridge', 'T': 'Other', 'O': 'Other'}
 sections = {'Verse', 'Chorus', 'Pre-chorus', 'Bridge', 'Tag', 'Instrumental', 'BREAK'}
 ignore_section = {'BREAK'}
-sections_regex = '|'.join(['^' + section + '[0-9 ]*:$' for section in sections])
-repeat_section_regex = '|'.join(['^' + section + '[0-9 ]*' for section in sections])
+sections_regex = '|'.join(['^' + section + '[0-9 ]*:' for section in sections])
+repeat_section_regex = '|'.join(['^' + section + '[0-9 ]*$' for section in sections])
 
 # Variables used for creating song xml
 verse_parts = list(string.ascii_lowercase)  # Creates ['a', 'b', 'c', ..., 'z']
@@ -58,19 +58,31 @@ font_spacing_main = 38
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
 song_text = ""
-with open('lyrics_text/lyrics_02-20-22.txt', 'r') as lyricsfile:
+with open('lyrics_text/lyrics_02-27-22.txt', 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
+# Checks if a given line is the definition of a section. Below are a few examples
+# Chorus:
+# Verse 2:
+# Verse 1:[3] <-- specifies section-specific lines_per_slide
 def is_section(line):
     if re.match(sections_regex, line):
-        words = line.split()
+        colon_splits = line.split(":")
+        lps = None
+        # Check if section-specific lines_per_slide is given [n]
+        if len(colon_splits[1]) > 0:
+            # Supports numbers 1-9 only
+            lps = int(colon_splits[1][1])
+
+        words = colon_splits[0].split()
+
         if len(words) > 1:
-            return line.split()[0], line.split()[1].rstrip(':')
+            return words[0], words[1], lps
         else:
-            return line.split()[0].rstrip(':'), 1
+            return words[0], 1, lps
     else:
-        return None, None
+        return None, None, None
 
 
 def is_repeat_Section(line):
@@ -91,13 +103,14 @@ def is_repeat_Section(line):
 # Parses the song from given annotated English and Telugu text
 def get_song_annotated(one, two, lines_per_slide, title):
     sections = dict()
+    section_lines = dict()
     order = []
 
     for line in one:
         if not line:
             continue
 
-        section, id = is_section(line)
+        section, id, sec_lines = is_section(line)
         rsection, rid = is_repeat_Section(line)
         if section:
             if section[0] == 'I':  # Instrumental
@@ -106,6 +119,10 @@ def get_song_annotated(one, two, lines_per_slide, title):
                 sid = section[0] + str(id)
             if section not in ignore_section:
                 order.append(sid)
+
+            # If section-specific lines per slide is given use it
+            section_lines[sid] = sec_lines or lines_per_slide
+
         elif rsection:
             sid = rsection[0] + str(rid)
             if rsection not in ignore_section:
@@ -146,6 +163,7 @@ def get_song_annotated(one, two, lines_per_slide, title):
                 break
 
     return {'sections': sections,
+            'section_lines': section_lines,
             'order': order,
             'verse_order': ' '.join(order),
             'lines_per_slide': lines_per_slide,
@@ -283,7 +301,7 @@ def create_song_slide_deck(song):
         n = len(section1)
 
         # Validation
-        if section2 and n != len(section2):
+        if section2 and len(section1) != len(section2):
             raise SyntaxError("Lines don't match for song: " + str(song))
 
         label = '---[{sec}:{id}]---'.format(sec=section_lookup[o[0]], id=o[1])
@@ -294,10 +312,17 @@ def create_song_slide_deck(song):
         else:
             section_map.add(label)
 
+        # Get lines_per_slide for given section
+        # If not specified for a section, it defaults to song lines_per_slide
+        # If not then, it defaults to global (default_lines_per_slide)
+        section_lines_per_slide = song['section_lines'][o]
+
         # Convert a section (with n lines) to k slides, and put in a dict with vid (verse id) as key
-        lyrics1_xml_dict.update(append_section_slides(label, o, deck1, section1, song['lines_per_slide']))
+        lyrics1_xml_dict.update(
+            append_section_slides(label, o, deck1, section1, section_lines_per_slide))
         if section2:
-            lyrics2_xml_dict.update(append_section_slides(label, o, deck2, section2, song['lines_per_slide']))
+            lyrics2_xml_dict.update(
+                append_section_slides(label, o, deck2, section2, section_lines_per_slide))
 
     # Merge decks into a a single deck (song text in "edit-all")
     song['deck'] = merge_decks(deck1, deck2)
@@ -371,7 +396,7 @@ def save_to_xml(song):
     song_xml = start + properties + get_xml('lyrics', '\n'.join(lyrics_xml_list)) + end
 
     # Write to file
-    with open(song['title'] + '.xml', 'w') as xml_file:
+    with open(f"songs_xml/{song['title']}.xml", 'w') as xml_file:
         # TODO: Find a way to pretty print without disturbing verse lines text
         # xml_file.write(xml.dom.minidom.parseString(song_xml).toprettyxml())
         xml_file.write(song_xml)
@@ -389,8 +414,7 @@ def get_song_lyrics_content(song, i):
         for counter in verse_parts:
             vid = id + counter
             if vid in lyrics_dict:
-                # TODO: checking img script - use img_format var
-                img_name = '{:0>2d}-{:0>2d}_{}.{}'.format(i, j, vid, "img_format")
+                img_name = '{:0>2d}-{:0>2d}_{}.{}'.format(i, j, vid, img_format)
                 if two_langs:
                     lyrics_two_langs = lyrics_dict[vid].split(line_delim + line_delim)
                     text1 = lyrics_two_langs[0].replace(line_delim, '\n')
@@ -558,7 +582,7 @@ def main():
     # Init empty presentation
     pptx_green = create_new_presentation()
     pptx_main = create_new_presentation()
-    # init_images_dir() TODO: checking img script
+    init_images_dir()
 
     i = 1
     # Create slides
@@ -571,7 +595,7 @@ def main():
         content = get_song_lyrics_content(song, i)
         # save_to_images(content)
         save_to_ppt_green(content, pptx_green, song['title'])
-        # save_to_ppt_main(content, pptx_main, song['title'])
+        save_to_ppt_main(content, pptx_main, song['title'])
         i = i + 1
 
         # Print text
