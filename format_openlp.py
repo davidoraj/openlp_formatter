@@ -376,7 +376,7 @@ def save_to_xml(song):
     properties_text = \
         get_xml('titles', get_xml('title', song['title'])) + \
         get_xml('authors', get_xml('author', 'Unknown')) + \
-        get_xml('verseOrder', f"i1 {song['verse_order'].lower()}")
+        get_xml('verseOrder', f"i1 {song['verse_order'].lower()} i2")
     properties = '\n' + get_xml('properties', properties_text) + '\n'
 
     # Create a list of verses with name=verse_id
@@ -391,6 +391,10 @@ def save_to_xml(song):
         verse_lines = get_xml('lines', ''.join(song['lyrics_xml'][vid]))
         lyrics_xml_list.append(get_xml('verse', verse_lines, 'name="{}"'.format(vid)))
     end = "\n</song>"
+
+    # Add song ending slide
+    lyrics_xml_list.append(
+        get_xml('verse', get_xml('lines', ''), 'name="i2"'))
 
     # Put combine xml content into one string
     song_xml = start + properties + get_xml('lyrics', '\n'.join(lyrics_xml_list)) + end
