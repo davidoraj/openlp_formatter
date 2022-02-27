@@ -570,7 +570,7 @@ def main():
         content = get_song_lyrics_content(song, i)
         # save_to_images(content)
         save_to_ppt_green(content, pptx_green, song['title'])
-        # save_to_ppt_main(content, pptx_main, song['title'])
+        save_to_ppt_main(content, pptx_main, song['title'])
         i = i + 1
 
         # Print text
