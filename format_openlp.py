@@ -1,6 +1,7 @@
 import re
 import os
 import string
+import argparse
 from collections import OrderedDict
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -28,7 +29,7 @@ section_delim = '<br/><br/>'
 
 lyrics_ppt_file_green = "Lyrics GREEN.pptx"
 lyrics_ppt_file_main = "ICC Worship Lyrics.pptx"
-background_image_path = 'backgrounds/ICC_slides_template.001.jpeg'
+background_image_path = 'backgrounds/background1.jpg'
 
 margin = 0.2
 total_width = 8
@@ -57,8 +58,12 @@ font_spacing_main = 38
 
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
 
+# Read lyrics text file input
+parser = argparse.ArgumentParser()
+parser.add_argument("--lyrics", type=str, required=True, help="Path to file containing lyrics")
+args = parser.parse_args()
 song_text = ""
-with open('lyrics_text/lyrics_02-27-22.txt', 'r') as lyricsfile:
+with open('lyrics_text/' + args.lyrics, 'r') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 

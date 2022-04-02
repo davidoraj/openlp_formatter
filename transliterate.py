@@ -1,27 +1,15 @@
 from googletrans import Translator
 import re
+import argparse
 
-song_text = """
-ప్రభువా గురి యెద్దకే
-పరిగెత్తుచున్నాను నేను (2)
-ఉన్నత పిలుపునకు కలుగు
-బహుమానము పొందవలెనని (2)
+# Read telugu text from file
+parser = argparse.ArgumentParser()
+parser.add_argument("--input", type=str, required=True, help="Path to file containing Telugu text for translation")
+args = parser.parse_args()
 
-1. ఏవేవీ లాభకరములై యుండెనో
-వాటిని క్రీస్తునిమిత్తం (2)
-నష్టముగా ఎంచుకొని
-ముందుకే సాగుచున్నాను (2)
-
-2. క్రీస్తును సంపాదించుకొని
-తన పునరుధ్ధాన బలమును (2)
-ఎరిగి ఆయన శ్రమలలో
-పాలివాడనౌదున్ (2)
-
-3. వెనుకున్న వన్నియు మరచి
-ముందున్న వాటి కొరకై (2)
-వేగిరపడుచు ధైర్యముగా
-ముందుకుసాగుచున్నాను (2)
-"""
+song_text = ""
+with open(args.input, 'r') as telugu_text:
+    song_text = ''.join(telugu_text.readlines())
 
 replace = {
     'ā': 'aa',
@@ -99,7 +87,7 @@ translated = remove_accents(translated, replace2)
 translated = format_text(translated)
 
 print("\n\n---")
-print("INSERT_TITLE")
+print(translated.split('\n')[0].title())  # Title
 print("Chorus:")
 print(translated)
 print("--")
