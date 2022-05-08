@@ -92,5 +92,5 @@ print(translated.split('\n')[0].title())  # Title
 print("Chorus:")
 print(translated)
 print("--")
-print(song_text[1:-1])
+print(song_text[0:-1])
 print("---")
