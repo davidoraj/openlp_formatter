@@ -181,7 +181,11 @@ def get_song_objects(song_lines_list):
 
     for song_lines in song_lines_list:
         line = song_lines[0][0]  # first line ---
-        title = song_lines[0][1].title()  # second line
+
+        # TODO: Fix title case when special chars (ex. you're --> You'Re)
+        # title = song_lines[0][1].title()  # second line
+        title = string.capwords(song_lines[0][1]) # second line
+
         one = song_lines[0][2:]
         two = song_lines[1]
 
