@@ -9,7 +9,7 @@ img_offset_top = 20
 img_offset1 = 20
 img_offset2 = 980
 img_font_spacing = 15
-img_font = ImageFont.truetype('Nirmala.ttf', size=44)
+img_font = ImageFont.load_default() # ImageFont.truetype('Nirmala.ttf', size=44)
 img_width = 1920
 img_height = 350
 
