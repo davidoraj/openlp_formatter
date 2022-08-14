@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 import os
 import string
@@ -184,7 +186,7 @@ def get_song_objects(song_lines_list):
 
         # TODO: Fix title case when special chars (ex. you're --> You'Re)
         # title = song_lines[0][1].title()  # second line
-        title = string.capwords(song_lines[0][1]) # second line
+        title = string.capwords(song_lines[0][1])  # second line
 
         one = song_lines[0][2:]
         two = song_lines[1]
