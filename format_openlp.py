@@ -4,6 +4,11 @@ import re
 import os
 import string
 import argparse
+
+# Required for version 3.10+
+import collections
+import collections.abc
+
 from collections import OrderedDict
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -65,7 +70,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--lyrics", type=str, required=True, help="Path to file containing lyrics")
 args = parser.parse_args()
 song_text = ""
-with open('lyrics_text/' + args.lyrics, 'r') as lyricsfile:
+with open('lyrics_text/' + args.lyrics, 'r', encoding='utf-8') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 
@@ -411,7 +416,7 @@ def save_to_xml(song):
     song_xml = start + properties + get_xml('lyrics', '\n'.join(lyrics_xml_list)) + end
 
     # Write to file
-    with open(f"songs_xml/{song['title']}.xml", 'w') as xml_file:
+    with open(f"songs_xml/{song['title']}.xml", 'w', encoding='utf-8') as xml_file:
         # TODO: Find a way to pretty print without disturbing verse lines text
         # xml_file.write(xml.dom.minidom.parseString(song_xml).toprettyxml())
         xml_file.write(song_xml)

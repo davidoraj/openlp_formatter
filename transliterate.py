@@ -8,7 +8,7 @@ parser.add_argument("--input", type=str, required=True, help="Path to file conta
 args = parser.parse_args()
 
 song_text = ""
-with open(args.input, 'r') as telugu_text:
+with open(args.input, 'r', encoding='utf-8') as telugu_text:
     song_text = ''.join(telugu_text.readlines())
 
 replace = {
