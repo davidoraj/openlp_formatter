@@ -26,7 +26,7 @@ Who nailed Him to that tree
 
 Chorus
 
-Bridge:[4]
+Bridge:
 Now my debt is paid
 It is paid in full
 By the precious blood
@@ -50,3 +50,4 @@ Chorus
 
 Chorus 2:
 Praise and honour unto Thee
+---
