@@ -11,7 +11,7 @@ Karra-gaddi koyya-kaa-lainanu
 Bayalupadu prativaani kriyalu
 Karra-gaddi koyya-kaalainanu
 Vendi-bangaaramu viluva-raallainanu
-Agniye telpunu (2) Appude kanugonduvu (2)
+Agniye telpunu (2) Appude kanugonduvu
 
 Chorus
 	
@@ -21,7 +21,7 @@ Pondu-vaadokkade bahumatini
 Pandemandu neeku paalunnadaa
 Pondu-vaadokkade bahumatini
 Yyodhuda-vai-manchi buddhini kaligina
-Vaada-baarani (2) Kireeta mondedavu (2)
+Vaada-baarani (2) Kireeta mondedavu
 
 Chorus
 
@@ -31,7 +31,7 @@ Phalitam-unnadaa nee sevalo
 Aatmala-korakai bhaaram-unnadaa
 Phalita-munnadaa nee sevalo
 Prabhuni raakalo andari yeduta
-Aananda-mahima (2) Kireeta mondedavu (2)
+Aananda-mahima (2) Kireeta mondedavu
 
 Chorus
 
@@ -51,7 +51,7 @@ Kaapaadu-konu viswaasa-munu
 Manchi poraatamu poraadumu
 Kaapaadu-konu viswaasa-munu
 Tana pratya-kshata na-pekshin-chumu
-Neeti-kireetamu (2) Nee-kivva-badunu (2)
+Neeti-kireetamu (2) Nee-kivva-badunu
 
 Chorus
 
@@ -84,21 +84,21 @@ Chorus
 బయలుపడు ప్రతివాని క్రియలు
 కర్రగడ్డి కొయ్యకాలైనను
 వెండి బంగారము విలువ రాళ్ళైనను
-అగ్నియే తెల్పును (2) అప్పుడే కనుగొందువు (2)
+అగ్నియే తెల్పును (2) అప్పుడే కనుగొందువు
 
 2. పందెమందు నీకు పాలున్నదా (2)
 పొందువాడొక్కడే బహుమతిని
 పందెమందు నీకు పాలున్నదా
 పొందువాడొక్కడే బహుమతిని
 య్యోధుడవై మంచి బుద్ధిని కలిగిన
-వాడబారని (2) కిరీట మొందెదవు (2)
+వాడబారని (2) కిరీట మొందెదవు
 
 3. ఆత్మలకొరకై భారమున్నదా (2)
 ఫలితమున్నదా నీ సేవలో
 ఆత్మలకొరకై భారమున్నదా
 ఫలితమున్నదా నీ సేవలో
 ప్రభుని రాకలో అందరి యెదుట
-ఆనందమహిమ (2) కిరీట మొందెదవు (2)
+ఆనందమహిమ (2) కిరీట మొందెదవు
 
 4. సంఘము నడిపే సేవకుడా (2)
 మందను నడుపుము ప్రేమతోడ
@@ -152,9 +152,9 @@ Nee kanneeti praarthane (2)
 Chorus
 
 Verse 2:
-2. Raatigundelanu-maamsamugaa maarchunu
+2. Raatigundelanu maamsamugaa maarchunu
 Deena praardhana
-Satruvu-landarini mitrulanugaa cheyunu
+Satruvu landarini mitrulanugaa cheyunu
 Taggimpu praardhana
 
 Verse 2
@@ -168,8 +168,8 @@ Chorus
 Verse 3:
 3. Yesuto saha-vaasamu-penchunu
 Anudina praardhana
-Sodhanalo-nundi mana-lanu tappinchunu
-Melakuva-gala-praardhana
+Sodhana-lonundi mana-lanu tappinchunu
+Mela-kuva gala-praardhana
 
 Verse 3
 

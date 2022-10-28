@@ -60,13 +60,13 @@ We are Your children
 And we've gathered here today
 We've gathered here to pray
 Hear our cry
-Lord, we need Your mercy
+O Lord, we need Your mercy
 And we need Your grace today
 Hear us as we pray
 
 Chorus:
 Our Father, who art in Heaven
-Hallowed be thy name
+Hallowed be Thy name
 Our Father, hear us from Heaven
 Forgive our sins we pray
 
@@ -91,10 +91,11 @@ And this is the song
 We'll be singing forever
 Holy is the Lord
 Holy is the Lord (2)
- Holy is the Lord
-  Holy is the Lord (2)
+Holy is the Lord
+Holy is the Lord (2)
 
 Verse 1
+Chorus
 Chorus
 ---
 Praarthane Balamainadi
@@ -118,7 +119,9 @@ Pre-chorus 1:
 Annitiki parishkaaramu
 Nee kanneeti praarthane (2)
 
-Chorus
+Chorus 2:
+Praarthane balamainadi
+Vijayamuto manalanu nadipinchedi
 
 Verse 2:
 2. Raatigundelanu-maamsamugaa maarchunu
@@ -132,7 +135,7 @@ Pre-chorus 2:
 Nemmadi-nichi saantini-nosagu
 Samaadhaana praarthane (2)
 
-Chorus
+Chorus 2
 
 Verse 3:
 3. Yesuto saha-vaasamu-penchunu
@@ -163,6 +166,9 @@ Pre-chorus 4
 అన్నిటికి పరిష్కారము
 నీ కన్నీటి ప్రార్థనే (2)
 
+ప్రార్థనే బలమైనది
+విజయముతో మనలను నడిపించేది
+
 2. రాతిగుండెలను మాంసముగా మార్చును
 దీన ప్రార్ధన
 శత్రువులందరిని మిత్రులనుగా చేయును
@@ -179,11 +185,14 @@ Pre-chorus 4
 సమస్త వ్యాధులకు స్వస్థత
 చేకూర్చును మోకాళ్ళ ప్రార్థనే (2)
 ---
-Kaalamu Sameepamu
+Kaalamu Sameepamu (1)
 Chorus:
 Kaalamu sameepamu prabhu yesu vachun (2)
 Jeetamu pondunu nija-daasudu
-Aananda-mondedaru aananda-mondedaru (2)
+
+Pre-chorus:
+Aananda-mondedaru
+Aananda-mondedaru (2)
 
 Verse 1:
 1. Bayalupadu prativaani kriyalu (2)
@@ -205,16 +214,6 @@ Vaada-baarani (2) Kireeta mondedavu (2)
 
 Chorus
 
-Verse 6:
-6. Bhaktito bratuka gorinacho (2)
-Siddhapadu ponda hinsalanu
-Bhaktito bratuka gorinacho
-Siddhapadu ponda hinsalanu
-Antamu varaku nammika-yunchina
-Jeeva-kireetamu (2) Pon-deda-veruchu (2)
-
-Chorus
-
 Verse 7:
 7. Daya-cheyu sreshta-deevenalu (2)
 Angeeka-rinchu nee praarthanalu
@@ -224,10 +223,13 @@ Praarthana yandu melkoni-yundumu
 Swarna-kireetamu (2) Dha-rimpa-jeyunu (2)
 
 Chorus
+Pre-chorus
 --
 కాలము సమీపము ప్రభు యేసు వచ్చున్ (2)
 జీతము పొందును నిజ దాసుడు
-ఆనందమొందెదరు ఆనందమొందెదరు (2)	
+
+ఆనందమొందెదరు
+ఆనందమొందెదరు (2)	
 
 1. బయలుపడు ప్రతివాని క్రియలు (2)
 కర్రగడ్డి కొయ్యకాలైనను
@@ -242,13 +244,6 @@ Chorus
 పొందువాడొక్కడే బహుమతిని
 య్యోధుడవై మంచి బుద్ధిని కలిగిన
 వాడబారని (2) కిరీట మొందెదవు (2)
-
-6. భక్తితో బ్రతుక గోరినచో (2)
-సిద్ధపడు పొంద హింసలను
-భక్తితో బ్రతుక గోరినచో
-సిద్ధపడు పొంద హింసలను
-అంతము వరకు నమ్మికయుంచిన
-జీవకిరీటము (2) పొందెద వెరుచు (2)
 
 7. దయచేయు శ్రేష్ట దీవెనలు (2)
 అంగీకరించు నీ ప్రార్థనలు
