@@ -1,10 +1,13 @@
+#!/usr/bin/env python3
+
 from googletrans import Translator
 import re
 import argparse
 
 # Read telugu text from file
 parser = argparse.ArgumentParser()
-parser.add_argument("--input", type=str, required=True, help="Path to file containing Telugu text for translation")
+parser.add_argument("--input", type=str, default="telugu.txt", required=False,
+                    help="Path to file containing Telugu text for translation")
 args = parser.parse_args()
 
 song_text = ""
@@ -78,19 +81,24 @@ def format_text(text):
     return '\n'.join(output)
 
 
-translated = ""
+def main():
+    translated = ""
 
-translator = Translator()
-translated = translator.translate(song_text, dest="en").extra_data['origin_pronunciation']
+    translator = Translator()
+    translated = translator.translate(song_text, dest="en").extra_data['origin_pronunciation']
 
-translated = remove_accents(translated, replace)
-translated = remove_accents(translated, replace2)
-translated = format_text(translated)
+    translated = remove_accents(translated, replace)
+    translated = remove_accents(translated, replace2)
+    translated = format_text(translated)
 
-print("\n\n---")
-print(translated.split('\n')[0].title())  # Title
-print("Chorus:")
-print(translated)
-print("--")
-print(song_text)
-print("---")
+    print("\n\n---")
+    print(translated.split('\n')[0].title())  # Title
+    print("Chorus:")
+    print(translated)
+    print("--")
+    print(song_text)
+    print("---")
+
+
+if __name__ == "__main__":
+    main()
