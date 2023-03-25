@@ -3,31 +3,14 @@
 import os
 
 song_delim = '---'
-inputdir = "lyrics_text/"
-outputdir = "output/"
-lyricsfiles = os.listdir("lyrics_text")
+inputdir = "output/"
+outputdir = "root/"
+lyricsfiles = os.listdir("output")
 songmap = {}
-dups = 0
 
 
-def song_already_exists(song, title):
-    global dups
-    # check for duplicate song
-    if title not in songmap:
-        return False
-
-    n = songmap[title]
-
-    for i in range(1, n + 1):
-        suffix = f"_{n}" if n > 1 else ""
-        filename = f"{outputdir}{title}{suffix}.txt"
-        with open(filename, 'r', encoding='utf-8') as songfile:
-            songtext = songfile.readlines()
-            if songtext == song:
-                dups = dups + 1
-                return True
-
-    return False
+def song_text_is_same(song1, song2):
+    return song1 == song2
 
 
 def save_songs_to_file(songs):
@@ -35,8 +18,6 @@ def save_songs_to_file(songs):
         title = song[1].strip()
 
         # check for duplicate song
-        if song_already_exists(song, title):
-            continue
 
         songmap[title] = songmap.get(title, 0) + 1
 
@@ -67,7 +48,6 @@ def main():
             save_songs_to_file(songs)
 
     print('Done')
-    print(f'Total Duplicates: {dups}')
 
 
 if __name__ == "__main__":
