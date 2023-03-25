@@ -3,9 +3,9 @@
 import os
 
 song_delim = '---'
-inputdir = "/Users/davidogirala/git-repos/openlp_formatter/lyrics_text/"
-outputdir = "/Users/davidogirala/git-repos/openlp_formatter/output/"
-lyricsfiles = os.listdir("/Users/davidogirala/git-repos/openlp_formatter/lyrics_text")
+inputdir = "lyrics_text/"
+outputdir = "output/"
+lyricsfiles = os.listdir("lyrics_text")
 songmap = {}
 
 
