@@ -1,123 +1,91 @@
----3
+---
 Andaala Taara
 Chorus:
-Andaala taara
-Arudenche naakai
+Andaala taara arudenche naakai
 Ambara veedhilo
-Avathaara-murthi
-Yesayya keerthi
+Avathaara-murthi Yesayya keerthi
 Avani chaatuchun
 
 Pre-chorus:
-Aananda-sandhra
-Mupponge naalo
+Aananda-sandhra mupponge naalo
 Amara-kaanthilo
-Aadi devuni chuda
-Aashimpa manasu
+Aadi devuni chuda aashimpa manasu
 Payana maithini
 
 Chorus
 
 Verse 1:
-1. Viswaasa-yaatra
-Dooram-enthaina
+1. Viswaasa-yaatra dooram-enthaina
 Vinduga-thochenu
-Vinthaina shaanti
-Varshinche-naalo
+Vinthaina shaanti varshinche-naalo
 Vijaya-padhamuna
-Viswalan-eledi
-Deva-kumaaruni
+Viswalan-eledi deva-kumaaruni
 Veekshinchu deekshato
-Virajimme balamu
-Pravahinche prema
+Virajimme balamu pravahinche prema
 Visraanti nosaguchun
 
 Chorus
 
 Verse 2:
-2. Yerushalemu
-Raaja-nagarilo
+2. Yerushalemu raaja-nagarilo
 Yesuni vedakuchu
-Erigina daari
-Tolagina-vela
+Erigina daari tolagina-vela
 Edalo krungithi
-Yesayya-taara
-Yepattivole
+Yesayya-taara yepattivole
 Eduraaye trovalo
-Ento yabbura paduchu
-Vismaya monduchu
-Yegithi swami-kadaku
+Ento yabbura paduchu, vismaya
+Monduchu yegithi swami-kadaku
 
 Chorus
 
 Verse 3:
-3. Prabhu janma-sthalamu
-Paakaye-gaani
+3. Prabhu janma-sthalamu Paakaye-gaani
 Paraloka saudhame
-Baaluni-chooda
-Jeevitha-mantha
+Baaluni-chooda Jeevitha-mantha
 Pavana-maayenu
-Prabhu-paadha-puja
-Deevena-kaaga
+Prabhu-paadha-puja Deevena-kaaga
 Prasarinche punyamu
-Bratuke mandira-maaye
-Arpanale sirulaaye
-Phali-yinche prarthana
+Bratuke mandira-maaye, arpanale
+Sirulaaye phali-yinche prarthana
 
 Chorus
 Pre-chorus
 Chorus
 Chorus
 --
-అందాల తార
-అరుదెంచె నాకై
+అందాల తార అరుదెంచె నాకై
 అంబర వీధిలో
-అవతారమూర్తి
-యేసయ్య కీర్తి
+అవతారమూర్తి యేసయ్య కీర్తి
 అవని చాటుచున్
 
-ఆనందసంద్ర
-ముప్పొంగె నాలో
+ఆనందసంద్ర ముప్పొంగె నాలో
 అమరకాంతిలో
-ఆది దేవుని చూడ
-ఆశింప మనసు
+ఆది దేవుని చూడ ఆశింప మనసు
 పయన మైతిని
 
-1. విశ్వాసయాత్ర
-దూరమెంతైన
+1. విశ్వాసయాత్ర దూరమెంతైన
 విందుగతోచెను
-వింతైన శాంతి
-వర్షించెనాలో
+వింతైన శాంతి వర్షించెనాలో
 విజయపధమున
-విశ్వాలనేలేడి
-దేవకుమారుని
+విశ్వాలనేలేడి దేవకుమారుని
 వీక్షించు దీక్షతో
-విరజిమ్మె బలము
-ప్రవహించె ప్రేమ
+విరజిమ్మె బలము ప్రవహించె ప్రేమ
 విశ్రాంతి నొసగుచున్
 
-2. యెరూషలేము
-రాజనగరిలో
+2. యెరూషలేము రాజనగరిలో
 యేసుని వెదకుచు
-ఎరిగిన దారి
-తొలగినవేళ
+ఎరిగిన దారి తొలగినవేళ
 ఎదలో క్రుంగితి
-యేసయ్యతార
-యేపట్టివోలె
+యేసయ్యతార యేపట్టివోలె
 ఎదురాయె త్రోవలో
 ఎంతో యబ్బుర పడుచు
-విస్మయ మొందుచు
-యేగితిస్వామికడకు
+విస్మయ మొందుచు యేగితిస్వామికడకు
 
-3. ప్రభు జన్మస్థలము
-పాకయేగాని
+3. ప్రభు జన్మస్థలము పాకయేగాని
 పరలోక సౌధమే
-బాలునిజూడ
-జీవితమంతా
+బాలునిజూడ జీవితమంతా
 పావనమాయెను
-ప్రభుపాదపూజ
-దీవెనకాగ
+ప్రభుపాదపూజ దీవెనకాగ
 ప్రసరించె పుణ్యము
-బ్రతుకే మందిరమాయె
-అర్పణలే సిరులాయె
+బ్రతుకే మందిరమాయె అర్పణలే సిరులాయె
 ఫలియించె ప్రార్థన
