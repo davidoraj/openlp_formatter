@@ -1,4 +1,4 @@
----2
+---
 Nee vaakyame Naa Deepamai
 Chorus:
 Nee vaakyame naa deepamai
@@ -34,10 +34,9 @@ Pre-chorus
 Chorus
 Chorus
 
-Tag:
+Chorus 2:
 Na madini veligin-chunu
 Na madini veligin-chunu
-
 --
 నీ వాక్యమే నా దీపమై
 నీ త్రోవలొ నడిపించును
