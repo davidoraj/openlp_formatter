@@ -1,6 +1,6 @@
 ---
 Idhigo Nee Raaju Vachuchunde
-Chorus:[2]
+Chorus:
 Idigo neeraaju vachuchunde
 Seeyonu-kumaari santoshinchu
 Yerushalem kumaari ullasinchu (2)
@@ -11,7 +11,7 @@ Dosha-memiyu lekaye (2)
 Paapa-rahithudu prabhu
 Vachu-chunde (2)
 
-Chorus 2:[2]
+Chorus 2:
 Idigo neeraaju vachuchunde
 Seeyonu-kumaari santoshinchu
 Yerushalem kumaari ullasinchu
@@ -64,7 +64,7 @@ Hallelujah (2)
 
 Chorus
 --
-దిగో నీరాజు వచ్చుచుండె
+ఇదిగో నీరాజు వచ్చుచుండె
 సీయోనుకుమారి సంతోషించు
 యెరుషలేం కుమారి ఉల్లసించు (2)
 
@@ -73,7 +73,7 @@ Chorus
 పాపరహితుడు ప్రభు
 వచ్చుచుండె (2)
 
-దిగో నీరాజు వచ్చుచుండె
+ఇదిగో నీరాజు వచ్చుచుండె
 సీయోనుకుమారి సంతోషించు
 యెరుషలేం కుమారి ఉల్లసించు
 
