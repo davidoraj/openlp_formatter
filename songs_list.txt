@@ -1,0 +1,3 @@
+output-golden/O Praise The Name.txt
+output-golden/Hymn Of Heaven.txt
+output-golden/Mulla Kireetamu.txt
