@@ -70,7 +70,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--lyrics", type=str, required=True, help="Path to file containing lyrics")
 args = parser.parse_args()
 song_text = ""
-with open('lyrics_text/' + args.lyrics, 'r', encoding='utf-8') as lyricsfile:
+with open(args.lyrics, 'r', encoding='utf-8') as lyricsfile:
     song_text = lyricsfile.readlines()
 
 

@@ -5,7 +5,7 @@ import os
 song_delim = '---'
 inputdir = "output/"
 outputdir = "root/"
-lyricsfiles = os.listdir("output")
+lyricsfiles = os.listdir("output-golden")
 songmap = {}
 
 
