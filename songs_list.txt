@@ -1,3 +1,6 @@
-output-golden/O Praise The Name.txt
-output-golden/Hymn Of Heaven.txt
+output-golden/I Gave My Life For Thee.txt
+output-golden/Aparaadhini Yesayyaa_1267.txt
 output-golden/Mulla Kireetamu.txt
+output-golden/Aahaa Mahaathma (1-2).txt	
+output-golden/Aahaa Mahaathma (3-4).txt
+output-golden/Aahaa Mahaathma (7).txt
