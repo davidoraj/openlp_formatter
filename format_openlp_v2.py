@@ -354,8 +354,10 @@ def get_song_lines(songslist):
     with open(songslist, 'r', encoding='utf-8') as songslist:
         for songname in songslist.readlines():
             songname = songname.strip()
+            if songname.startswith('#') or songname.startswith('//'):
+                continue
             print(f'Reading {songname}')
-            with open(songname, 'r', encoding='utf-8') as songfile:
+            with open(f'output-golden/{songname}', 'r', encoding='utf-8') as songfile:
                 lines = songfile.readlines()
 
                 one = []
