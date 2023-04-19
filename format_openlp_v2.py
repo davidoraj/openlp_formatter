@@ -69,6 +69,7 @@ font_spacing_main = 38
 parser = argparse.ArgumentParser()
 parser.add_argument("--songslist", type=str, required=False, help="Path to file containing song file names.",
                     default="songs_list.txt")
+parser.add_argument("--english", action='store_true', required=False, help="Output English lyrics only.")
 args = parser.parse_args()
 
 
@@ -376,7 +377,11 @@ def get_song_lines(songslist):
                         line = line.capitalize()
 
                     if line == "--":
-                        curlist = two
+                        # if english only flag is true, ignore telugu lyrics
+                        if args.english:
+                            break
+                        else:
+                            curlist = two
                     elif line:
                         curlist.append(line)
                     else:
