@@ -22,7 +22,15 @@ from create_lyrics_images import *
 # README
 # Max chars per line = 38
 
-default_lines_per_slide = 2
+# Read arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("--songslist", type=str, required=False, help="Path to file containing song file names.",
+                    default="songs_list.txt")
+parser.add_argument("--english", action='store_true', required=False, help="Output English lyrics only.")
+parser.add_argument("--lps", type=int, required=False, help="Defines lines per slide globally.", default=2)
+args = parser.parse_args()
+
+default_lines_per_slide = args.lps
 section_lookup = {'V': 'Verse', 'C': 'Chorus', 'P': 'Pre-chorus', 'B': 'Bridge', 'T': 'Other', 'O': 'Other'}
 sections = {'Verse', 'Chorus', 'Pre-chorus', 'Bridge', 'Tag', 'Instrumental', 'BREAK'}
 ignore_section = {'BREAK'}
@@ -63,15 +71,8 @@ font_size_title_main = 38
 font_size_main = 26
 font_spacing_main = 38
 
+
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
-
-# Read lyrics text file input
-parser = argparse.ArgumentParser()
-parser.add_argument("--songslist", type=str, required=False, help="Path to file containing song file names.",
-                    default="songs_list.txt")
-parser.add_argument("--english", action='store_true', required=False, help="Output English lyrics only.")
-args = parser.parse_args()
-
 
 # Checks if a given line is the definition of a section. Below are a few examples
 # Chorus:
