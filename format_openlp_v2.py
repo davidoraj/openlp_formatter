@@ -67,9 +67,9 @@ font_size_green = 14  # 16
 font_spacing_green = 22  # 24
 
 # Fonts for main slides
-font_size_title_main = 38
-font_size_main = 26
-font_spacing_main = 38
+font_size_title_main = 42 #38
+font_size_main = 32 #26
+font_spacing_main = 42 #38
 
 
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
