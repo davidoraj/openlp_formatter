@@ -614,7 +614,7 @@ def main():
     # Init empty presentation
     pptx_green = create_new_presentation()
     pptx_main = create_new_presentation()
-    init_images_dir()
+    # init_images_dir()
 
     i = 1
     # Create slides
