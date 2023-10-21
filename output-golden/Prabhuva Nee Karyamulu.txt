@@ -1,4 +1,4 @@
----8
+---
 Prabhuva Nee Karyamulu
 Pre-chorus 1:
 Prabhuva nee karyamulu
@@ -25,8 +25,7 @@ Needu pranamu pettitivi
 Verse 1
 
 Pre-chorus 3:
-Na veda-nantatini
-Natyamuga marchitivi
+Na veda-nantatini natyamuga marchitivi
 Needu sakshiga yilalo jeevintunu
 
 Chorus
@@ -40,8 +39,7 @@ Anudinamu nadipitivi
 Verse 2
 
 Pre-chorus 4:
-Nirdoshiga cheyutakai
-Neevu doshi-vainavu
+Nirdoshiga cheyutakai neevu doshivainavu
 Needu sakshiga yilalo jeevintunu
 
 Chorus
@@ -67,8 +65,7 @@ Chorus
 నా పాపము నిమిత్తమై
 నీదు ప్రాణము పెట్టితివి
 
-నా వేదనంతటిని
-నాట్యముగా మార్చితివి
+నా వేదనంతటిని నాట్యముగా మార్చితివి
 నీదు సాక్షిగా యిలలో జీవింతునూ
 
 2. లోకములో నేనుండగా
@@ -76,6 +73,5 @@ Chorus
 నూతన వాత్సల్యముచే
 అనుదినము నడిపితివి
 
-నిర్దోషిగ చేయుటకై
-నీవు దోషివైనావు
+నిర్దోషిగ చేయుటకై నీవు దోషివైనావు
 నీదు సాక్షిగా యిలలో జీవింతునూ
