@@ -1,7 +1,7 @@
----4
+---
 Across The Lands
 Verse 1:
-You’re the Word of God the Father
+1. You’re the Word of God the Father
 From before the world began
 Every star and every planet
 Has been fashioned by Your hand
@@ -17,7 +17,7 @@ And Your cry of love rings out
 Across the lands.
 
 Verse 2:
-Yet You left the gaze of angels
+2. Yet You left the gaze of angels
 Came to seek and save the lost
 And exchanged the joy of heaven
 For the anguish of a cross
@@ -29,7 +29,7 @@ That the guilty may go free
 Chorus
 
 Verse 3:
-With a shout You rose victorious
+3. With a shout You rose victorious
 Wresting victory from the grave
 And ascended into heaven
 Leading captives in Your way
