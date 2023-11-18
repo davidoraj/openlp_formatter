@@ -1,10 +1,10 @@
 ---
 Yajamaanudu Vaadukonutaku
-Chorus 1:
+Chorus:
 Yaja-maanudu vaadu-konutaku
 Arhamaina paatragaa undutaku (2)
 
-Pre-chorus 1:
+Pre-chorus:
 Jeevi-thaantham poraadu
 Alasi-poku yenaadu (2)
 
@@ -20,7 +20,6 @@ Pavitra-mugaa jeevin-china naadu
 Pari-sudhuda-vai
 Yaja-maanudu vaadu-konutaku
 Arhamaina paatra-magudamu
-(Jeevi-thaantham...)
 
 Pre-chorus
 Chorus
@@ -28,12 +27,11 @@ Pre-chorus
 
 Verse 2:
 2. Yava-necha-lanu veedumu
-Yesu-prabhu-vunu vedu mu(2)
+Yesu-prabhu-vunu vedumu(2)
 Neetinee viswaasa-munu
 Premanu samaa-dhaana-munu(2)
 Ventaadumu
 Sodhin-chumu Saadhin-chumu (x2)
-(Yaja-maanudu...)
 
 Chorus
 Pre-chorus
@@ -55,12 +53,10 @@ Pre-chorus
 పరిశుద్దుడవై
 యజమానుడు వాడుకొనుటకు
 అర్హమైన పాత్రమగుదము
-(జీవితాంతం...)
 
-2. యవనేచ్హలను  వీడుము  
-యేసుప్రభువును  వేడుము(2)  
-నీతినీ - విశ్వాసమును   
+2. యవనేచ్హలను  వీడుము
+యేసుప్రభువును  వేడుము(2)
+నీతినీ - విశ్వాసమును
 ప్రేమను సమాధానమును(2)
 వెంటాడుము
-సోధించుము సాధించుము (x2)
-(యజమానుడు...)
+శోధించుము సాధించుము (x2)
