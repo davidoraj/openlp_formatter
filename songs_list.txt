@@ -1,16 +1,9 @@
 # Songs List
 
-# 24th
-Aakaasamlo Veluthuru
-Rakshakun-dudayinchinaadata
-Christmas Day
-Chinta Ledika Yesu Puttenu
-O Holy Night
-
 # 25th
-#Yesukreesthu Puttenu Nedu
-#It’s Christmas
-#God Rest Ye Merry Gentlemen
-#Koniyaada Tarame Ninnu
-#Andaala Aasaakiranam
+Yesukreesthu Puttenu Nedu
+It’s Christmas
+God Rest Ye Merry Gentlemen
+Koniyaada Tarame Ninnu
+Andaala Aasaakiranam
 
