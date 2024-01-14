@@ -1,10 +1,12 @@
 ---
 Naa Jeevitakaalamantha
-Chorus:
+Chorus 1:
 Naa jeevita-kaalamantha
 Ninu keertinchina chaalunaa
 Naa samastha sampada
 Neekichina chaalunaa
+
+Chorus 2:
 Yesu needu melulakai
 Ne badulugaa emittunu
 Naa dehame yaagamugaa
@@ -24,7 +26,7 @@ Nanu-dhairya-parichi nanu-aadukunnaavu
 Yesu neeve neeve yesu
 Neeve-naa sarva-swamu
 
-Chorus
+Chorus 1
 
 Verse 2:
 2. Kanneeti raatrulu
@@ -40,12 +42,14 @@ Naapai chupinchi nanu-hattukunnaavu
 Yesu neeve neeve yesu
 Neeve naa aanandamu
 
-Chorus
+Chorus 1
+Chorus 2
 --
 నా జీవితకాలమంత
 నిను కీర్తించిన చాలునా
 నా సమస్త సంపద
 నీకిచ్చిన చాలునా
+
 యేసు నీదు మేలులకై
 నే బదులుగా ఏమిత్తును
 నా దేహమే యాగముగా
