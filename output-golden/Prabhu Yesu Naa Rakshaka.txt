@@ -1,6 +1,6 @@
 ---
 Prabhu Yesu Naa Rakshaka
-Chorus:
+Chorus 2:
 Prabhu yesu na rakshaka nosagu kannulu
 Naaku niratamu ne ninnu juda (2)
 
@@ -8,7 +8,9 @@ Pre-chorus:
 Alphayu neeve
 Omegayu neeve (2)
 
-Chorus
+Chorus:
+Prabhu yesu na rakshaka nosagu kannulu
+Naaku niratamu ne ninnu juda
 
 Verse 1:
 1. Priyudaina yohaanu patmaasulo
@@ -42,13 +44,16 @@ Nindaara nanu judanimmu (2)
 
 Chorus
 Pre-chorus
-Chorus
+Chorus 2
 --
 ప్రభు యేసు నా రక్షకా నొసగు కన్నులు
 నాకు నిరతము నే నిన్ను జూడ (2)
 
 అల్ఫయు నీవే
 ఒమేగయు నీవే (2)
+
+ప్రభు యేసు నా రక్షకా నొసగు కన్నులు
+నాకు నిరతము నే నిన్ను జూడ
 
 1. ప్రియుడైన యోహాను పత్మాసులో
 ప్రియమైన యేసు నీ స్వరూపము (2)
