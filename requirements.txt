@@ -1,2 +1,6 @@
 python-pptx
 googletrans==4.0.0rc1
+pyaudio
+selenium
+bs4
+numpy
