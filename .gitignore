@@ -1,3 +1,5 @@
+**.DS_Store
+__pycache__/
 output
 songs_xml
 .idea
