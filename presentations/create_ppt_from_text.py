@@ -34,6 +34,30 @@ patterns = [
 ]
 
 
+class Spec:
+    width
+    height
+    margin
+
+    title_font
+    content_font
+    font_spacing
+    font_name = 'Arial'
+
+    title_height
+    content_position
+    content_height_1
+    content_height_2
+    textbox_width
+
+    def update_dimensions(self):
+        self.title_height = self.margin + self.title_font
+        self.content_position = self.margin + self.title_height
+        self.content_height_1 = self.height - 2 * self.margin
+        self.content_height_2 = self.height - 2 * self.margin - self.title_height
+        self.textbox_width = self.width - 2 * self.margin
+
+
 def create_presentation(width, height):
     presentation = Presentation()
     presentation.slide_width = Pt(width)
@@ -84,7 +108,7 @@ def set_slide_title(textFrame, titleText):
     textFrame.paragraphs[0].text = titleText
 
 
-def add_formatted_text_runs(para, text, font_size):
+def add_formatted_text_runs(para, text):
     # Track the last position in the text
     last_pos = 0
 
@@ -124,18 +148,15 @@ def add_slide_content(para, text, indent):
     format_para_for_content(para)
 
     text = text.strip()
-    # bullet_char = ''
     if text.startswith('*') or text.startswith('-'):
         text = text.replace('*', '● ', 1)
-        text = text.replace('-', '- ', 1)
-        # bullet_char = text[0]
-        # text = text.lstrip('-* ')
+        # text = text.replace('-', '- ', 1)
 
     # Ensure it's not indented as a bullet
     # Level determines bullet/numbering style (0 is top level)
     para.level = indent
 
-    add_formatted_text_runs(para, text, content_font)
+    add_formatted_text_runs(para, text)
 
     # TODO: Doesn't work
     # para._element.get_or_add_pPr().set("numId", "1")  # Enable numbering
@@ -143,8 +164,8 @@ def add_slide_content(para, text, indent):
     # bullet.set("char", bullet_char)
 
 
-def create_title_textbox(slide):
-    textBox = slide.shapes.add_textbox(Pt(margin), Pt(margin), Pt(textbox_width), Pt(title_height))
+def create_title_textbox(slide, spec):
+    textBox = slide.shapes.add_textbox(Pt(spec.margin), Pt(spec.margin), Pt(spec.textbox_width), Pt(spec.title_height))
     textFrame = textBox.text_frame
     textFrame.word_wrap = True
     textFrame.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
@@ -153,11 +174,13 @@ def create_title_textbox(slide):
     return textFrame
 
 
-def create_content_textbox(slide, has_title):
+def create_content_textbox(slide, has_title, spec):
     if has_title:
-        textBox = slide.shapes.add_textbox(Pt(margin), Pt(content_position), Pt(textbox_width), Pt(content_height_1))
+        textBox = slide.shapes.add_textbox(Pt(spec.margin), Pt(spec.content_position), Pt(spec.textbox_width),
+                                           Pt(spec.content_height_1))
     else:
-        textBox = slide.shapes.add_textbox(Pt(margin), Pt(margin), Pt(textbox_width), Pt(content_height_2))
+        textBox = slide.shapes.add_textbox(Pt(spec.margin), Pt(spec.margin), Pt(spec.textbox_width),
+                                           Pt(spec.content_height_2))
 
     textFrame = textBox.text_frame
     textFrame.word_wrap = True
@@ -183,62 +206,47 @@ def format_para_for_content(para):
     para.font.bold = False
     para.font.color.rgb = white_color
 
-    # para.font.bold = True
-    # para.font.italic = True
-    # para.font.underline = True
-    # para.font.strike = True
 
-
-def set_ppt_spec_for_live():
-    global width
-    global height
-    global margin
-    global title_font
-    global content_font
-    global font_spacing
-    global font_name
-
+def set_ppt_spec_for_live(spec):
     # footer only
-    width = 1280
-    height = 350
-    margin = 20
+    spec.width = 1280
+    spec.height = 350
+    spec.margin = 20
 
-    title_font = 35
-    content_font = 26
-    font_spacing = 1.1
-    font_name = 'Arial'
+    spec.title_font = 35
+    spec.content_font = 26
+    spec.font_spacing = 1.1
+    spec.font_name = 'Arial'
+
+    spec.update_dimensions()
+    return spec
 
 
-def set_ppt_spec_for_main():
-    global width
-    global height
-    global margin
-    global title_font
-    global content_font
-    global font_spacing
-    global font_name
-
+def set_ppt_spec_for_main(spec):
     # 4:3 ratio
-    width = 1440
-    height = 1080
-    margin = 20
+    spec.width = 1440
+    spec.height = 1080
+    spec.margin = 40
 
-    title_font = 40
-    content_font = 34
-    font_spacing = 1.2
-    font_name = 'Arial'
+    spec.title_font = 40
+    spec.content_font = 34
+    spec.font_spacing = 1.5
+    spec.font_name = 'Arial'
+
+    spec.update_dimensions()
+    return spec
 
 
-def convert_text_to_presentation(slides, name):
+def convert_text_to_presentation(slides, spec, name):
     # Create presentation
-    presentation = create_presentation(width, height)
+    presentation = create_presentation(spec.width, spec.height)
 
     # Add slides to presentation
     for slide_content in slides:
         slide = new_slide(presentation)
         has_title = is_title(slide_content[0])
-        title_textFrame = create_title_textbox(slide)
-        content_textFrame = create_content_textbox(slide, has_title)
+        title_textFrame = create_title_textbox(slide, spec)
+        content_textFrame = create_content_textbox(slide, has_title, spec)
         first_content_line = True
 
         for line in slide_content:
@@ -282,11 +290,11 @@ def get_slides_list_from_text(filename):
 def main():
     slides = get_slides_list_from_text('content.txt')
 
-    set_ppt_spec_for_main()
-    convert_text_to_presentation(slides, 'Presentation Main.pptx')
+    main_spec = set_ppt_spec_for_main(Spec())
+    convert_text_to_presentation(slides, main_spec, 'Presentation Main.pptx')
 
-    set_ppt_spec_for_live()
-    convert_text_to_presentation(slides, 'Presentation LIVE.pptx')
+    live_spec = set_ppt_spec_for_live(Spec())
+    convert_text_to_presentation(slides, live_spec, 'Presentation LIVE.pptx')
 
 
 if __name__ == "__main__":
