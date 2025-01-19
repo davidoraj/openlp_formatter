@@ -7,23 +7,9 @@ from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR, MSO_UNDE
 from itertools import takewhile
 import re
 
-width = 1280
-height = 350
-margin = 20
-
 green_color = RGBColor(0, 200, 0)
 black_color = RGBColor(50, 50, 50)
 white_color = RGBColor(245, 245, 245)
-title_font = 36
-content_font = 28
-font_spacing = 1.1
-font_name = 'Arial'
-
-title_height = margin + title_font
-content_position = margin + title_height
-content_height_1 = height - 2 * margin
-content_height_2 = height - 2 * margin - title_height
-textbox_width = width - 2 * margin
 
 # Define patterns for bold, italic, and underline
 patterns = [
@@ -35,20 +21,46 @@ patterns = [
 
 
 class Spec:
-    width
-    height
-    margin
+    width = None
+    height = None
+    margin = None
 
-    title_font
-    content_font
-    font_spacing
+    title_font = None
+    content_font = None
+    font_spacing = None
     font_name = 'Arial'
 
-    title_height
-    content_position
-    content_height_1
-    content_height_2
-    textbox_width
+    title_height = None
+    content_position = None
+    content_height_1 = None
+    content_height_2 = None
+    textbox_width = None
+
+    def set_ppt_spec_for_live(self):
+        # footer only
+        self.width = 1280
+        self.height = 350
+        self.margin = 20
+
+        self.title_font = 35
+        self.content_font = 26
+        self.font_spacing = 1.1
+        self.font_name = 'Arial'
+
+        self.update_dimensions()
+
+    def set_ppt_spec_for_main(self):
+        # 4:3 ratio
+        self.width = 1440
+        self.height = 1080
+        self.margin = 40
+
+        self.title_font = 60
+        self.content_font = 48
+        self.font_spacing = 1.5
+        self.font_name = 'Arial'
+
+        self.update_dimensions()
 
     def update_dimensions(self):
         self.title_height = self.margin + self.title_font
@@ -108,7 +120,7 @@ def set_slide_title(textFrame, titleText):
     textFrame.paragraphs[0].text = titleText
 
 
-def add_formatted_text_runs(para, text):
+def add_formatted_text_runs(para, text, spec):
     # Track the last position in the text
     last_pos = 0
 
@@ -141,11 +153,11 @@ def add_formatted_text_runs(para, text):
     if last_pos < len(text):
         run = para.add_run()
         run.text = text[last_pos:]
-        run.font.size = Pt(content_font)
+        run.font.size = Pt(spec.content_font)
 
 
-def add_slide_content(para, text, indent):
-    format_para_for_content(para)
+def add_slide_content(para, text, indent, spec):
+    format_para_for_content(para, spec)
 
     text = text.strip()
     if text.startswith('*') or text.startswith('-'):
@@ -156,7 +168,7 @@ def add_slide_content(para, text, indent):
     # Level determines bullet/numbering style (0 is top level)
     para.level = indent
 
-    add_formatted_text_runs(para, text)
+    add_formatted_text_runs(para, text, spec)
 
     # TODO: Doesn't work
     # para._element.get_or_add_pPr().set("numId", "1")  # Enable numbering
@@ -170,7 +182,7 @@ def create_title_textbox(slide, spec):
     textFrame.word_wrap = True
     textFrame.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
     para = textFrame.paragraphs[0]
-    format_para_for_title(para)
+    format_para_for_title(para, spec)
     return textFrame
 
 
@@ -188,53 +200,23 @@ def create_content_textbox(slide, has_title, spec):
     return textFrame
 
 
-def format_para_for_title(para):
-    para.line_spacing = font_spacing
+def format_para_for_title(para, spec):
+    para.line_spacing = spec.font_spacing
     para.alignment = PP_PARAGRAPH_ALIGNMENT.LEFT
-    para.line_spacing = font_spacing
-    para.font.name = font_name
-    para.font.size = Pt(title_font)
+    para.line_spacing = spec.font_spacing
+    para.font.name = spec.font_name
+    para.font.size = Pt(spec.title_font)
     para.font.bold = True
     para.font.color.rgb = white_color
 
 
-def format_para_for_content(para):
-    para.line_spacing = font_spacing
+def format_para_for_content(para, spec):
+    para.line_spacing = spec.font_spacing
     para.alignment = PP_PARAGRAPH_ALIGNMENT.LEFT
-    para.font.name = font_name
-    para.font.size = Pt(content_font)
+    para.font.name = spec.font_name
+    para.font.size = Pt(spec.content_font)
     para.font.bold = False
     para.font.color.rgb = white_color
-
-
-def set_ppt_spec_for_live(spec):
-    # footer only
-    spec.width = 1280
-    spec.height = 350
-    spec.margin = 20
-
-    spec.title_font = 35
-    spec.content_font = 26
-    spec.font_spacing = 1.1
-    spec.font_name = 'Arial'
-
-    spec.update_dimensions()
-    return spec
-
-
-def set_ppt_spec_for_main(spec):
-    # 4:3 ratio
-    spec.width = 1440
-    spec.height = 1080
-    spec.margin = 40
-
-    spec.title_font = 40
-    spec.content_font = 34
-    spec.font_spacing = 1.5
-    spec.font_name = 'Arial'
-
-    spec.update_dimensions()
-    return spec
 
 
 def convert_text_to_presentation(slides, spec, name):
@@ -257,11 +239,11 @@ def convert_text_to_presentation(slides, spec, name):
                 first_content_line = False
                 indent = get_indent(line)
                 content_para = content_textFrame.paragraphs[0]
-                add_slide_content(content_para, line.strip(), indent)
+                add_slide_content(content_para, line.strip(), indent, spec)
             else:
                 indent = get_indent(line)
                 content_para = content_textFrame.add_paragraph()
-                add_slide_content(content_para, line.strip(), indent)
+                add_slide_content(content_para, line.strip(), indent, spec)
 
     presentation.save(name)
 
@@ -290,10 +272,12 @@ def get_slides_list_from_text(filename):
 def main():
     slides = get_slides_list_from_text('content.txt')
 
-    main_spec = set_ppt_spec_for_main(Spec())
+    main_spec = Spec()
+    main_spec.set_ppt_spec_for_main()
     convert_text_to_presentation(slides, main_spec, 'Presentation Main.pptx')
 
-    live_spec = set_ppt_spec_for_live(Spec())
+    live_spec = Spec()
+    live_spec.set_ppt_spec_for_live()
     convert_text_to_presentation(slides, live_spec, 'Presentation LIVE.pptx')
 
 
