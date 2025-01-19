@@ -30,10 +30,11 @@ patterns = [
     (r"\*(.*?)\*", {"bold": True}),  # Bold: *text*
     (r"_(.*?)_", {"italic": True}),  # Italic: _text_
     (r"__(.*?)__", {"underline": MSO_UNDERLINE.SINGLE_LINE}),  # Underline: __text__
+    (r"[1-3]*[ ]*[Song of]*[A-Za-z]*[ ][1-9]+:[0-9-,]*", {"bold": True})
 ]
 
 
-def create_presentation():
+def create_presentation(width, height):
     presentation = Presentation()
     presentation.slide_width = Pt(width)
     presentation.slide_height = Pt(height)
@@ -100,12 +101,16 @@ def add_formatted_text_runs(para, text, font_size):
         for pattern, styles in patterns:
             if re.fullmatch(pattern, match.group()):
                 run = para.add_run()
-                run.text = next(ftext for ftext in match.groups() if ftext is not None)
+                # text_value = next(ftext for ftext in match.groups() if ftext is not None)
+                text_value = match.group()
+                for ftext in match.groups():
+                    if ftext:
+                        text_value = ftext
+                        break
+                run.text = text_value
                 for style, value in styles.items():
                     setattr(run.font, style, value)
-                # run.font.size = Pt(font_size)
                 break
-
         last_pos = end
 
     # Add remaining unformatted text
@@ -119,9 +124,11 @@ def add_slide_content(para, text, indent):
     format_para_for_content(para)
 
     text = text.strip()
-    bullet_char = ''
+    # bullet_char = ''
     if text.startswith('*') or text.startswith('-'):
-        bullet_char = text[0]
+        text = text.replace('*', '● ', 1)
+        text = text.replace('-', '- ', 1)
+        # bullet_char = text[0]
         # text = text.lstrip('-* ')
 
     # Ensure it's not indented as a bullet
@@ -182,27 +189,49 @@ def format_para_for_content(para):
     # para.font.strike = True
 
 
-def main():
-    with open('content.txt', 'r') as contentfile:
-        content = contentfile.readlines()
+def set_ppt_spec_for_live():
+    global width
+    global height
+    global margin
+    global title_font
+    global content_font
+    global font_spacing
+    global font_name
 
-    # Read ppt content into a slide list
-    slides = []
-    slide = []
-    for line in content:
-        line = line.rstrip('\n')
-        if line == '==':
-            # end of slide, create new slide
-            slides.append(slide)
-            slide = []
-            continue
-        slide.append(line)
+    # footer only
+    width = 1280
+    height = 350
+    margin = 20
 
-    # Debug slide list
-    print(slides)
+    title_font = 35
+    content_font = 26
+    font_spacing = 1.1
+    font_name = 'Arial'
 
+
+def set_ppt_spec_for_main():
+    global width
+    global height
+    global margin
+    global title_font
+    global content_font
+    global font_spacing
+    global font_name
+
+    # 4:3 ratio
+    width = 1440
+    height = 1080
+    margin = 20
+
+    title_font = 40
+    content_font = 34
+    font_spacing = 1.2
+    font_name = 'Arial'
+
+
+def convert_text_to_presentation(slides, name):
     # Create presentation
-    presentation = create_presentation()
+    presentation = create_presentation(width, height)
 
     # Add slides to presentation
     for slide_content in slides:
@@ -226,7 +255,38 @@ def main():
                 content_para = content_textFrame.add_paragraph()
                 add_slide_content(content_para, line.strip(), indent)
 
-    presentation.save('my pres.pptx')
+    presentation.save(name)
+
+
+def get_slides_list_from_text(filename):
+    with open(filename, 'r') as contentfile:
+        content = contentfile.readlines()
+
+    # Read ppt content into a slide list
+    slides = []
+    slide = []
+    for line in content:
+        line = line.rstrip('\n')
+        if line == '==':
+            # end of slide, create new slide
+            slides.append(slide)
+            slide = []
+            continue
+        slide.append(line)
+
+    # Debug slide list
+    print(slides)
+    return slides
+
+
+def main():
+    slides = get_slides_list_from_text('content.txt')
+
+    set_ppt_spec_for_main()
+    convert_text_to_presentation(slides, 'Presentation Main.pptx')
+
+    set_ppt_spec_for_live()
+    convert_text_to_presentation(slides, 'Presentation LIVE.pptx')
 
 
 if __name__ == "__main__":
