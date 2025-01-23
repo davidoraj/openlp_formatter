@@ -5,7 +5,7 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR, MSO_UNDERLINE
 from itertools import takewhile
-from create_images_from_text import *
+from presentations.create_images_from_text import *
 import re
 
 green_color = RGBColor(0, 200, 0)

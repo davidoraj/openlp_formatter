@@ -9,7 +9,6 @@ img_height = 300
 margin = 20
 img_offset2 = (img_width / 2) + margin
 img_font_spacing = 15
-# img_font = ImageFont.truetype('Nirmala.ttf', size=44)
 
 font_arial = '/System/Library/Fonts/Supplemental/Arial.ttf'
 font_telugu = '/System/Library/Fonts/KohinoorTelugu.ttc'
@@ -27,12 +26,20 @@ def create_lyrics_images(content, dir):
         imageDraw = ImageDraw.Draw(image)
 
         if text2:
+            # Telugu (to the left)
             img_font = ImageFont.truetype(font_telugu, size=40)
+            imageDraw.multiline_text(xy=(margin, margin), font=img_font, spacing=img_font_spacing, text=text1)
         else:
+            # English only (centered)
             img_font = ImageFont.truetype(font_arial, size=44)
-        imageDraw.multiline_text(xy=(margin, margin), font=img_font, spacing=img_font_spacing, text=text1)
+
+            # textbbox returns: left, top, right, bottom
+            bbox = imageDraw.textbbox(xy=(0, 0), font=img_font, spacing=img_font_spacing, text=text1)
+            margin_left = (img_width - bbox[2]) / 2
+            imageDraw.multiline_text(xy=(margin_left, margin), font=img_font, spacing=img_font_spacing, text=text1)
 
         if text2:
+            # English (to the right)
             img_font = ImageFont.truetype(font_arial, size=44)
             imageDraw.multiline_text(xy=(img_offset2, margin), font=img_font, spacing=img_font_spacing,
                                      text=text2)
