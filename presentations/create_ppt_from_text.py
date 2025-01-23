@@ -5,11 +5,13 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR, MSO_UNDERLINE
 from itertools import takewhile
+from create_images_from_text import *
 import re
 
 green_color = RGBColor(0, 200, 0)
 black_color = RGBColor(50, 50, 50)
 white_color = RGBColor(245, 245, 245)
+image_dir = 'images'
 
 # Define patterns for bold, italic, and underline
 patterns = [
@@ -38,8 +40,8 @@ class Spec:
 
     def set_ppt_spec_for_live(self):
         # footer only
-        self.width = 1280
-        self.height = 350
+        self.width = 1900
+        self.height = 300
         self.margin = 20
 
         self.title_font = 35
@@ -58,6 +60,19 @@ class Spec:
         self.title_font = 60
         self.content_font = 48
         self.font_spacing = 1.5
+        self.font_name = 'Arial'
+
+        self.update_dimensions()
+
+    def set_image_spec_for_live(self):
+        # footer only
+        self.width = 1900
+        self.height = 300
+        self.margin = 20
+
+        self.title_font = 44
+        self.content_font = 36
+        self.font_spacing = 1.1
         self.font_name = 'Arial'
 
         self.update_dimensions()
@@ -279,6 +294,10 @@ def main():
     live_spec = Spec()
     live_spec.set_ppt_spec_for_live()
     convert_text_to_presentation(slides, live_spec, 'Presentation LIVE.pptx')
+
+    live_spec.set_image_spec_for_live()
+    init_images_dir(image_dir)
+    create_ppt_images(slides, live_spec, image_dir)
 
 
 if __name__ == "__main__":

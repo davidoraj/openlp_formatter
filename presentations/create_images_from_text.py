@@ -1,6 +1,8 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
 
+from presentations.create_ppt_from_text import black_color, is_title
+
 img_format = 'png'
 img_width = 1900
 img_height = 300
@@ -22,7 +24,7 @@ def init_images_dir(dir):
 
 def create_lyrics_images(content, dir):
     for img_name, text1, text2 in content:
-        image = Image.new(mode="RGB", size=(img_width, img_height), color=(0, 200, 0))
+        image = Image.new(mode="RGB", size=(img_width, img_height), color=black_color)
         imageDraw = ImageDraw.Draw(image)
 
         if text2:
@@ -37,5 +39,29 @@ def create_lyrics_images(content, dir):
                                      text=text2)
 
         image.save(fp=os.path.join(dir, img_name))
+
+    return
+
+
+def create_ppt_images(slides, spec, dir):
+    image_counter = 0
+
+    for slide_content in slides:
+        image = Image.new(mode="RGB", size=(spec.width, spec.height), color=black_color)
+        imageDraw = ImageDraw.Draw(image)
+        image_counter = image_counter + 1
+        content_position = spec.margin
+        if is_title(slide_content[0]):
+            titleText = slide_content[0].strip('# ')
+            img_font = ImageFont.truetype(font_arial, size=spec.title_font)
+            imageDraw.text(xy=(spec.margin, spec.margin), font=img_font, spacing=spec.font_spacing, text=titleText)
+            slide_content = slide_content[1:]
+            content_position = spec.content_position
+
+        contentText = '\n'.join(slide_content)
+        img_font = ImageFont.truetype(font_arial, size=spec.content_font)
+        imageDraw.text(xy=(spec.margin, content_position), font=img_font, spacing=spec.font_spacing, text=contentText)
+
+        image.save(fp=os.path.join(dir, f'ICC Message {image_counter:02.0f}.png'))
 
     return
