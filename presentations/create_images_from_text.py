@@ -18,8 +18,7 @@ font_telugu = '/System/Library/Fonts/KohinoorTelugu.ttc'
 def init_images_dir(dir):
     # Clear older images
     for f in os.listdir(dir):
-        print(f'deleting {os.path.join(dir, f)}')
-        # os.remove(os.path.join(dir, f))
+        os.remove(os.path.join(dir, f))
 
 
 def create_lyrics_images(content, dir):
@@ -50,17 +49,20 @@ def create_ppt_images(slides, spec, dir):
         image = Image.new(mode="RGB", size=(spec.width, spec.height), color=black_color)
         imageDraw = ImageDraw.Draw(image)
         image_counter = image_counter + 1
-        content_position = spec.margin
+        content_position = spec.margin_top
         if is_title(slide_content[0]):
             titleText = slide_content[0].strip('# ')
-            img_font = ImageFont.truetype(font_arial, size=spec.title_font)
-            imageDraw.text(xy=(spec.margin, spec.margin), font=img_font, spacing=spec.font_spacing, text=titleText)
+            img_font = ImageFont.truetype(spec.font_name, size=spec.title_font)
+            imageDraw.text(xy=(spec.margin_left, spec.margin_top), font=img_font, spacing=spec.font_spacing,
+                           text=titleText)
             slide_content = slide_content[1:]
             content_position = spec.content_position
 
         contentText = '\n'.join(slide_content)
-        img_font = ImageFont.truetype(font_arial, size=spec.content_font)
-        imageDraw.text(xy=(spec.margin, content_position), font=img_font, spacing=spec.font_spacing, text=contentText)
+        contentText = contentText.replace('_', '').replace('*', '')
+        img_font = ImageFont.truetype(spec.font_name, size=spec.content_font)
+        imageDraw.text(xy=(spec.margin_left, content_position), font=img_font, spacing=spec.font_spacing,
+                       text=contentText)
 
         image.save(fp=os.path.join(dir, f'ICC Message {image_counter:02.0f}.png'))
 

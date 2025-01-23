@@ -26,6 +26,8 @@ class Spec:
     width = None
     height = None
     margin = None
+    margin_left = None
+    margin_top = None
 
     title_font = None
     content_font = None
@@ -43,6 +45,8 @@ class Spec:
         self.width = 1900
         self.height = 300
         self.margin = 20
+        self.margin_left = self.margin
+        self.margin_top = self.margin
 
         self.title_font = 35
         self.content_font = 26
@@ -69,11 +73,13 @@ class Spec:
         self.width = 1900
         self.height = 300
         self.margin = 20
+        self.margin_left = self.margin * 3
+        self.margin_top = self.margin
 
-        self.title_font = 44
-        self.content_font = 36
-        self.font_spacing = 1.1
-        self.font_name = 'Arial'
+        self.title_font = 40
+        self.content_font = 32
+        self.font_spacing = 15
+        self.font_name = '/System/Library/Fonts/Supplemental/Arial.ttf'
 
         self.update_dimensions()
 
