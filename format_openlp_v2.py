@@ -15,7 +15,7 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR
 
-from create_lyrics_images import *
+from presentations.create_images_from_text import *
 
 # import xml.dom.minidom
 
@@ -45,6 +45,7 @@ section_delim = '<br/><br/>'
 lyrics_ppt_file_green = "Lyrics GREEN.pptx"
 lyrics_ppt_file_main = "ICC Worship Lyrics.pptx"
 background_image_path = 'backgrounds/background1.jpg'
+lyrics_images_dir = 'presentations/images'
 
 margin = 0.2
 total_width = 8
@@ -67,9 +68,9 @@ font_size_green = 14  # 16
 font_spacing_green = 22  # 24
 
 # Fonts for main slides
-font_size_title_main = 42 #38
-font_size_main = 32 #26
-font_spacing_main = 42 #38
+font_size_title_main = 42  # 38
+font_size_main = 32  # 26
+font_spacing_main = 42  # 38
 
 
 # c-chorus, n-verse, p-prechorus, b-bridge, c2
@@ -614,7 +615,13 @@ def main():
     # Init empty presentation
     pptx_green = create_new_presentation()
     pptx_main = create_new_presentation()
-    # init_images_dir()
+    init_images_dir(lyrics_images_dir)
+
+    print("----------------------------------")
+    i = 1
+    for song in songs:
+        print('{}. {}'.format(i, song['title']))
+        i = i + 1
 
     i = 1
     # Create slides
@@ -625,16 +632,10 @@ def main():
 
         # Export to images / ppt
         content = get_song_lyrics_content(song, i)
-        # save_to_images(content)
+        create_lyrics_images(content, lyrics_images_dir)
         save_to_ppt_green(content, pptx_green, song['title'])
         save_to_ppt_main(content, pptx_main, song['title'])
         i = i + 1
-
-        # Print text
-        # print("----------------------------------")
-        # print(song['verse_order'])
-        # for line in song['deck']:
-        #     print(line)
 
         print("----------------------------------")
         for id, text1, text2 in content:
