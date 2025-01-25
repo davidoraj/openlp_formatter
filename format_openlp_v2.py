@@ -632,7 +632,7 @@ def main():
 
         # Export to images / ppt
         content = get_song_lyrics_content(song, i)
-        create_lyrics_images(content, lyrics_images_dir)
+        # create_lyrics_images(content, lyrics_images_dir)
         save_to_ppt_green(content, pptx_green, song['title'])
         save_to_ppt_main(content, pptx_main, song['title'])
         i = i + 1
