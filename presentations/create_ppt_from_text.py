@@ -5,7 +5,7 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR, MSO_UNDERLINE
 from itertools import takewhile
-from presentations.create_images_from_text import *
+from create_images_from_text import *
 import re
 
 green_color = RGBColor(0, 200, 0)
@@ -286,7 +286,9 @@ def get_slides_list_from_text(filename):
         slide.append(line)
 
     # Debug slide list
-    print(slides)
+    for s in slides:
+        print('\n'.join(s))
+
     return slides
 
 
@@ -304,6 +306,8 @@ def main():
     live_spec.set_image_spec_for_live()
     init_images_dir(image_dir)
     create_ppt_images(slides, live_spec, image_dir)
+
+    print('\nDone.')
 
 
 if __name__ == "__main__":

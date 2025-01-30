@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-from presentations.create_ppt_from_text import black_color, is_title
+from create_ppt_from_text import black_color, is_title
 
 img_format = 'png'
 img_width = 1900
