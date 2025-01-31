@@ -140,6 +140,12 @@ def set_slide_title(textFrame, titleText):
     # add_formatted_text_runs(textFrame.paragraphs[0], titleText, title_font)
     textFrame.paragraphs[0].text = titleText
 
+def add_bullets(text):
+    text = text.strip()
+    if text.startswith('*') or text.startswith('-'):
+        text = text.replace('*', '● ', 1)
+        # text = text.replace('-', '- ', 1)
+    return text
 
 def add_formatted_text_runs(para, text, spec):
     # Track the last position in the text
@@ -151,7 +157,7 @@ def add_formatted_text_runs(para, text, spec):
         if start > last_pos:
             # Add unformatted text
             run = para.add_run()
-            run.text = text[last_pos:start]
+            run.text = add_bullets(text[last_pos:start])
             # run.font.size = Pt(font_size)
 
         # Identify matched formatting
@@ -164,7 +170,7 @@ def add_formatted_text_runs(para, text, spec):
                     if ftext:
                         text_value = ftext
                         break
-                run.text = text_value
+                run.text = add_bullets(text_value)
                 for style, value in styles.items():
                     setattr(run.font, style, value)
                 break
@@ -173,17 +179,17 @@ def add_formatted_text_runs(para, text, spec):
     # Add remaining unformatted text
     if last_pos < len(text):
         run = para.add_run()
-        run.text = text[last_pos:]
+        run.text = add_bullets(text[last_pos:])
         run.font.size = Pt(spec.content_font)
 
 
 def add_slide_content(para, text, indent, spec):
     format_para_for_content(para, spec)
 
-    text = text.strip()
-    if text.startswith('*') or text.startswith('-'):
-        text = text.replace('*', '● ', 1)
-        # text = text.replace('-', '- ', 1)
+    # text = text.strip()
+    # if text.startswith('*') or text.startswith('-'):
+    #     text = text.replace('*', '● ', 1)
+    #     # text = text.replace('-', '- ', 1)
 
     # Ensure it's not indented as a bullet
     # Level determines bullet/numbering style (0 is top level)
