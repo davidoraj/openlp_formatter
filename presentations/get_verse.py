@@ -1,4 +1,39 @@
 import xmltodict
+import tkinter as tk
+
+
+# def get_bible_verse():
+#     reference = entry.get()
+#     if reference:
+#         verse_text.set(fetch_verse_to_ui(reference))
+
+def fetch_verse_to_ui():
+    reference = entry.get()
+    if reference:
+        ref = print_reference(reference)
+        text = (ref + '\n' + print_verse(reference, bible_text=bible_text_nkjv) + '\n\n' +
+                print_verse(reference, bible_text=bible_text_telugu))
+        verse_text.set(text)
+        with open('verse_out.txt', 'w') as vfile:
+            vfile.writelines(text)
+
+
+# Create main window
+root = tk.Tk()
+root.title("Bible Verse Fetcher")
+
+# Input field
+entry = tk.Entry(root, width=30)
+entry.pack(pady=10)
+
+# Button to fetch verse
+button = tk.Button(root, text="Get Verse", command=fetch_verse_to_ui)
+button.pack(pady=5)
+
+# Label to display verse
+verse_text = tk.StringVar()
+label = tk.Label(root, textvariable=verse_text, wraplength=300, justify="center")
+label.pack(pady=10)
 
 short_form_lookup = {}
 book_index_lookup = {}
@@ -18,10 +53,10 @@ def init():
     for short in short_forms:
         short = short.strip()
         if short.endswith('.'):
-            short_form_lookup[short[:-1]] = book
+            short_form_lookup[short[:-1].lower()] = book
         else:
             book = short.strip()
-            short_form_lookup[book] = book
+            short_form_lookup[book.lower()] = book
 
     # Load english and telugu bibles
     with open("bibles/NKJV.xml", "r") as file:
@@ -39,7 +74,7 @@ def init():
 
 def get_book_from_reference(reference):
     i = reference.rfind(' ')
-    book = reference[:i].strip()
+    book = reference[:i].strip().lower()
     book = short_form_lookup[book]
     return book
 
@@ -92,16 +127,18 @@ def get_formatted_text(text):
 
 
 def print_reference(reference):
-    print(f'{get_book_from_reference(reference)} {get_chapter_verse_from_reference(reference)}')
+    ref = f'{get_book_from_reference(reference)} {get_chapter_verse_from_reference(reference)}'
+    print(ref)
+    return ref
 
 
 def print_verse(reference, bible_text):
     # debug
-
     text = get_reference(reference, bible_text)
     text = get_formatted_text(text)
     print(text)
     print()
+    return text
 
 
 def main():
@@ -114,6 +151,9 @@ def main():
     #     for v in vfile.readlines():
     #         print_verse(v.strip(), bible_text=bible_text_nkjv)
     #         print_verse(v.strip(), bible_text=bible_text_telugu)
+
+    # # Run GUI
+    root.mainloop()
 
 
 if __name__ == "__main__":
