@@ -15,7 +15,8 @@ from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_PARAGRAPH_ALIGNMENT, MSO_VERTICAL_ANCHOR
 
-from presentations.create_images_from_text import *
+# from presentations.create_images_from_text import *
+img_format = '.png'
 
 # import xml.dom.minidom
 
@@ -615,7 +616,7 @@ def main():
     # Init empty presentation
     pptx_green = create_new_presentation()
     pptx_main = create_new_presentation()
-    init_images_dir(lyrics_images_dir)
+    # init_images_dir(lyrics_images_dir)
 
     print("----------------------------------")
     i = 1
