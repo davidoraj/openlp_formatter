@@ -310,9 +310,9 @@ def main():
     live_spec.set_ppt_spec_for_live()
     convert_text_to_presentation(slides, live_spec, 'Presentation LIVE.pptx')
 
-    live_spec.set_image_spec_for_live()
-    init_images_dir(image_dir)
-    create_ppt_images(slides, live_spec, image_dir)
+    # live_spec.set_image_spec_for_live()
+    # init_images_dir(image_dir)
+    # create_ppt_images(slides, live_spec, image_dir)
 
     print('\nDone.')
 
