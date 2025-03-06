@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLP Stage View</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 2.4em;
+      line-height: 1.5;
+      font-weight: bold;
+      background-color: green;
+      color: white;
+      margin: 10px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start; /* Aligns content at the top */
+      height: 50vh;
+    }
+
+    .container {
+      width: 100%;
+      text-align: center;
+    }
+
+    .lyrics-block {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="singleColumn" class="lyrics-block" style="display: none;">Waiting for lyrics...</div>
+
+  <div id="twoColumn" class="lyrics-block" style="display: none;">
+    <div id="leftSlide">Left Lyrics...</div>
+    <div id="rightSlide">Right Lyrics...</div>
+  </div>
+</div>
+
+<script src="jquery.min.js"></script>
+<script src="stage.js"></script>
+</body>
+</html>
