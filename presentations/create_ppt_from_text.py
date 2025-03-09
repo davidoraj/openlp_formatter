@@ -19,7 +19,7 @@ patterns = [
     (r"\*(.*?)\*", {"bold": True}),  # Bold: *text*
     (r"_(.*?)_", {"italic": True}),  # Italic: _text_
     (r"__(.*?)__", {"underline": MSO_UNDERLINE.SINGLE_LINE}),  # Underline: __text__
-    (r"[1-3]*[ ]*[Song of]*[A-Za-z]*[ ][1-9]+:[0-9-,]*", {"bold": True})
+    (r"[1-3]*[ ]*[Song of]*[A-Za-z]*[ ][0-9]+:[0-9-,]*", {"bold": True})
 ]
 
 
@@ -58,13 +58,13 @@ class Spec:
 
     def set_ppt_spec_for_main(self):
         # 4:3 ratio
-        self.width = 1440
+        self.width = 1920
         self.height = 1080
-        self.margin = 40
+        self.margin = 60
 
-        self.title_font = 60
-        self.content_font = 48
-        self.font_spacing = 1.5
+        self.title_font = 85
+        self.content_font = 64
+        self.font_spacing = 1.3
         self.font_name = 'Arial'
 
         self.update_dimensions()
@@ -73,12 +73,12 @@ class Spec:
         # footer only
         self.width = 1900
         self.height = 300
-        self.margin = 20
+        self.margin = 50
         self.margin_left = self.margin * 3
         self.margin_top = self.margin
 
         self.title_font = 40
-        self.content_font = 32
+        self.content_font = 36
         self.font_spacing = 15
         self.font_name = '/System/Library/Fonts/Supplemental/Arial.ttf'
 

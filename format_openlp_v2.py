@@ -49,7 +49,7 @@ background_image_path = 'backgrounds/background1.jpg'
 lyrics_images_dir = 'presentations/images'
 
 margin = 0.2
-total_width = 8
+total_width = 10.67
 total_height = 6
 inches_margin_left = Inches(margin)
 inches_margin_right = Inches(margin)
@@ -473,7 +473,10 @@ def get_green_slide(root):
 
 def get_blank_slide(root):
     slide = root.slides.add_slide(root.slide_layouts[6])
-    slide.shapes.add_picture(background_image_path, Inches(0), Inches(0), Inches(9), Inches(6))
+    # slide.shapes.add_picture(background_image_path, Inches(0), Inches(0), Inches(9), Inches(6))
+    fill = slide.background.fill
+    fill.solid()
+    fill.fore_color.rgb = RGBColor(20, 20, 20)
     return slide
 
 
