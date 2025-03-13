@@ -91,9 +91,13 @@ def get_reference(reference, bible_text):
 
     cv = chapter_verse.split(':')
     chapter = int(cv[0]) - 1
-    verses = cv[1].split('-')
-    verse_start = int(verses[0]) - 1
-    verse_end = (verse_start + 1 if len(verses) == 1 else int(verses[1]))
+    if len(cv) > 1:
+        verses = cv[1].split('-')
+        verse_start = int(verses[0]) - 1
+        verse_end = (verse_start + 1 if len(verses) == 1 else int(verses[1]))
+    else:
+        verse_start = 0
+        verse_end = 9999
 
     book_index = book_index_lookup[book]
     try:
@@ -143,7 +147,8 @@ def print_verse(reference, bible_text):
 
 def main():
     init()
-    print_verse('John 1:21', bible_text=bible_text_nkjv)
+    print_verse('John 1', bible_text=bible_text_nkjv)
+    print_verse('John 1', bible_text=bible_text_telugu)
     print_verse('John 1:21', bible_text=bible_text_telugu)
 
     # # Test with nbbc verse list

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# Replace   
 
 from pptx import Presentation
 from pptx.util import Inches, Pt
@@ -49,21 +48,21 @@ class Spec:
         self.margin_left = self.margin
         self.margin_top = self.margin
 
-        self.title_font = 35
-        self.content_font = 26
-        self.font_spacing = 1.1
+        self.title_font = 36
+        self.content_font = 28
+        self.font_spacing = 1.2
         self.font_name = 'Arial'
 
         self.update_dimensions()
 
     def set_ppt_spec_for_main(self):
-        # 4:3 ratio
-        self.width = 1440
+        # 16:9 ratio
+        self.width = 1920
         self.height = 1080
-        self.margin = 40
+        self.margin = 50
 
-        self.title_font = 60
-        self.content_font = 48
+        self.title_font = 70
+        self.content_font = 55
         self.font_spacing = 1.5
         self.font_name = 'Arial'
 
@@ -141,12 +140,14 @@ def set_slide_title(textFrame, titleText):
     # add_formatted_text_runs(textFrame.paragraphs[0], titleText, title_font)
     textFrame.paragraphs[0].text = titleText
 
-def add_bullets(text):
+
+def add_bullets(text, run):
     text = text.strip()
     if text.startswith('*') or text.startswith('-'):
         text = text.replace('*', '● ', 1)
         # text = text.replace('-', '- ', 1)
     return text
+
 
 def add_formatted_text_runs(para, text, spec):
     # Track the last position in the text
@@ -158,7 +159,7 @@ def add_formatted_text_runs(para, text, spec):
         if start > last_pos:
             # Add unformatted text
             run = para.add_run()
-            run.text = add_bullets(text[last_pos:start])
+            run.text = add_bullets(text[last_pos:start], run)
             # run.font.size = Pt(font_size)
 
         # Identify matched formatting
@@ -171,7 +172,7 @@ def add_formatted_text_runs(para, text, spec):
                     if ftext:
                         text_value = ftext
                         break
-                run.text = add_bullets(text_value)
+                run.text = add_bullets(text_value, run)
                 for style, value in styles.items():
                     setattr(run.font, style, value)
                 break
@@ -180,23 +181,31 @@ def add_formatted_text_runs(para, text, spec):
     # Add remaining unformatted text
     if last_pos < len(text):
         run = para.add_run()
-        run.text = add_bullets(text[last_pos:])
+        run.text = add_bullets(text[last_pos:], run)
         run.font.size = Pt(spec.content_font)
 
 
 def add_slide_content(para, text, indent, spec):
-    format_para_for_content(para, spec)
+    format_para_for_content(para, indent, spec)
 
     # text = text.strip()
-    # if text.startswith('*') or text.startswith('-'):
-    #     text = text.replace('*', '● ', 1)
+    if text.startswith('*') or text.startswith('-'):
+        para.bullet = True
+        #     text = text.replace('*', '● ', 1)
     #     # text = text.replace('-', '- ', 1)
+    else:
+        para.bullet = False
 
     # Ensure it's not indented as a bullet
     # Level determines bullet/numbering style (0 is top level)
     para.level = indent
+    para.space_before = Pt(0)  # Adjust spacing before the paragraph
+    para.space_after = Pt(0)  # Adjust spacing after the paragraph
+    para.left_margin = Pt(36)  # Indents the first line
+    para.indent = Pt(-18)  # Hanging indent for wrapped text
 
     add_formatted_text_runs(para, text, spec)
+    # para.text = text
 
     # TODO: Doesn't work
     # para._element.get_or_add_pPr().set("numId", "1")  # Enable numbering
@@ -215,6 +224,7 @@ def create_title_textbox(slide, spec):
 
 
 def create_content_textbox(slide, has_title, spec):
+    # slide.shapes.placeholders[1].text_frame
     if has_title:
         textBox = slide.shapes.add_textbox(Pt(spec.margin), Pt(spec.content_position), Pt(spec.textbox_width),
                                            Pt(spec.content_height_1))
@@ -223,6 +233,7 @@ def create_content_textbox(slide, has_title, spec):
                                            Pt(spec.content_height_2))
 
     textFrame = textBox.text_frame
+    textFrame.clear()
     textFrame.word_wrap = True
     textFrame.vertical_anchor = MSO_VERTICAL_ANCHOR.TOP
     return textFrame
@@ -238,11 +249,11 @@ def format_para_for_title(para, spec):
     para.font.color.rgb = white_color
 
 
-def format_para_for_content(para, spec):
+def format_para_for_content(para, indent, spec):
     para.line_spacing = spec.font_spacing
     para.alignment = PP_PARAGRAPH_ALIGNMENT.LEFT
     para.font.name = spec.font_name
-    para.font.size = Pt(spec.content_font)
+    para.font.size = Pt(spec.content_font - indent * 2)
     para.font.bold = False
     para.font.color.rgb = white_color
 
@@ -257,6 +268,7 @@ def convert_text_to_presentation(slides, spec, name):
         has_title = is_title(slide_content[0])
         title_textFrame = create_title_textbox(slide, spec)
         content_textFrame = create_content_textbox(slide, has_title, spec)
+        content_textFrame.clear()
         first_content_line = True
 
         for line in slide_content:
@@ -266,7 +278,8 @@ def convert_text_to_presentation(slides, spec, name):
             elif first_content_line:
                 first_content_line = False
                 indent = get_indent(line)
-                content_para = content_textFrame.paragraphs[0]
+                content_para = content_textFrame.add_paragraph()
+                # content_para = content_textFrame.paragraphs[0]
                 add_slide_content(content_para, line.strip(), indent, spec)
             else:
                 indent = get_indent(line)
