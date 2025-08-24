@@ -141,15 +141,36 @@ def print_verse(reference, bible_text):
     text = get_reference(reference, bible_text)
     text = get_formatted_text(text)
     print(text)
+    print(f'wc = {len(text.split()) - 1}')
     print()
     return text
 
 
 def main():
     init()
-    print_verse('John 1', bible_text=bible_text_nkjv)
-    print_verse('John 1', bible_text=bible_text_telugu)
-    print_verse('John 1:21', bible_text=bible_text_telugu)
+    verse_list = [
+        'col 1:15-16',
+        'gen 1:1',
+        'isa 40:26',
+        'gen 1:26-27',
+        'gen 17:1-2',
+        'gen 2:2-3',
+        'exod 31:12-13',
+        'gen 2:23-24',
+        'dt 6:14-15',
+        'gen 3:14-15',
+        'ps 68:20',
+        'gen 4:7-8',
+        'jer 23:5-6',
+        'gen 5:1-3',
+        'Ps 90:2'
+    ]
+    # print_verse('John 1', bible_text=bible_text_nkjv)
+    # print_verse('John 1', bible_text=bible_text_telugu)
+    # print_verse('John 1:21', bible_text=bible_text_telugu)
+
+    for verse in verse_list:
+        print_verse(verse.strip(), bible_text=bible_text_nkjv)
 
     # # Test with nbbc verse list
     # with open('/Users/david_ogirala/git-repos/misc_tools/scraper/nbbc/verses.txt', 'r') as vfile:
@@ -158,7 +179,7 @@ def main():
     #         print_verse(v.strip(), bible_text=bible_text_telugu)
 
     # # Run GUI
-    root.mainloop()
+    # root.mainloop()
 
 
 if __name__ == "__main__":
